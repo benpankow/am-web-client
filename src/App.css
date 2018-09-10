@@ -4,6 +4,7 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  background-color: #FFFFFF;
 }
 
 .container {
@@ -19,10 +20,9 @@ html, body {
 }
 
 .album_art, .album_art_lg {
-  width: 175px;
-  height: 175px;
-  border: 1px solid black;
-  box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.5);
+  width: 177px;
+  height: 177px;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .album_art_lg {
@@ -54,7 +54,7 @@ html, body {
   position: absolute;
   left: 0;
   right: 0;
-  padding: 10px;
+  padding: 20px;
   margin-top: 20px;
   display: flex;
   z-index: 2;
@@ -106,7 +106,7 @@ html, body {
 
 .song_list_l {
   width: 100%;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .title {
@@ -153,12 +153,13 @@ html, body {
 .media_bar {
   height: 60px;
   width: 100%;
-  background-color: red;
   width: 100%;
   position: fixed;
   background-color: #DDDDDD;
-  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(to bottom, #EEEEEE, #CCCCCC);
+  border-bottom: 1px solid #AAAAAA;
   z-index: 3;
+  text-align: center;
 }
 
 .media_bar_padding {
@@ -217,4 +218,80 @@ html, body {
   margin-top: 5px;
   font-size: 12px;
   color: #555555;
+}
+
+.current_song_time {
+  position: absolute;
+  left: 8px;
+  bottom: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+
+.current_song_time_left {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  font-size: 12px;
+  color: #555555;
+}
+
+.playing_details_wrap {
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  height: 100%;
+  display: inline-block;
+}
+
+.playing_details {
+  position: absolute;
+  height: 100%;
+  text-align: left;
+  background-color: #EEEEEE;
+  border-left: 1px solid #BBBBBB;
+  border-right: 1px solid #BBBBBB;
+  left: 100px;
+  right: 100px;
+}
+
+.controls {
+  position: absolute;
+  left: 25px;
+}
+
+.media_button, .media_button_small {
+  width: 44px;
+  height: 44px;
+  margin-top: 8px;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: .7;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.media_button .material-icons, .media_button_small .material-icons {
+  margin-top: -5px;
+  margin-left: -6px;
+  font-size: 56px;
+}
+
+.media_button_small {
+  width: 36px;
+  height: 44px;
+  margin-top: 8px;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: .7;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.media_button_small .material-icons {
+  margin-top: 3px;
+  margin-left: -3px;
+  font-size: 40px;
 }

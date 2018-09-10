@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
+import {formatTime, playPause, isPlaying, nextItem, prevItem} from './utils';
 
 type Props = {
   music: MusicKit
@@ -18,16 +19,19 @@ class MediaBar extends Component<Props, State> {
 
   render() {
     const {music} = this.props;
-    const pct = music.player.currentPlaybackProgress * 100;
+    const pct = (music.player.currentPlaybackTime / music.player.currentPlaybackDuration) * 100;
 
-    const queue = music.player.queue._items;
-    let url = null;
+    const queue = music.player.queue;
+    let url = 'https://is4-ssl.mzstatic.com/image/thumb/Features19/v4/50/f0/d1/50f0d1ac-cf2d-de77-c5c2-73a3170c098e/source/500x500bb.jpeg';
     let title = null;
     let artist = null;
     let album = null;
 
-    if (queue.length > 0) {
-      const currentSong = queue[0];
+    const timeRemaining = music.player.currentPlaybackTimeRemaining;
+    const time = music.player.currentPlaybackTime;
+
+    if (queue._items.length > 0) {
+      const currentSong = queue._items[queue._position];
       url = currentSong.attributes.artwork.url;
       url = url.replace('{w}', 500);
       url = url.replace('{h}', 500);
@@ -38,18 +42,42 @@ class MediaBar extends Component<Props, State> {
 
     return (<div>
       <div className='media_bar'>
-        <img className='media_bar_art' src={url
-            ? url
-            : ''}/>
+        <div className='controls'>
+          <div className='media_button_small' onClick={prevItem}>
+            <i className={'material-icons'}>fast_rewind</i>
+          </div>
+          <div className='media_button' onClick={playPause}>
+            <i className={'material-icons'}>{
+                isPlaying()
+                  ? 'pause'
+                  : 'play_arrow'
+              }</i>
+          </div>
+          <div className='media_button_small' onClick={nextItem}>
+            <i className={'material-icons'}>fast_forward</i>
+          </div>
+        </div>
+        <div className='playing_details_wrap'>
+          <div className='playing_details'>
+            <img className='media_bar_art' src={url
+                ? url
+                : ''}/>
 
-        <div className='media_bar_right'>
-          <div className='current_song_title'>{title}</div>
-          <div className='current_song_info'>{artist}
-            - {album}</div>
-          <div className='progress_outer'>
-            <div className='progress' style={{
-                width: pct + "%"
-              }}/>
+            <div className='media_bar_right'>
+              <div className='current_song_title'>{title}</div>
+              <div className='current_song_info'>{
+                  artist
+                    ? artist + ' - ' + album
+                    : ''
+                }</div>
+              <div className='current_song_time'>{formatTime(time)}</div>
+              <div className='current_song_time_left'>-{formatTime(timeRemaining)}</div>
+              <div className='progress_outer'>
+                <div className='progress' style={{
+                    width: pct + "%"
+                  }}/>
+              </div>
+            </div>
           </div>
         </div>
       </div>

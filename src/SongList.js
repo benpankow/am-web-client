@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {playMedia} from './utils';
+import {playMedia, formatTimeMs, playCollection} from './utils';
 
 type Props = {
   album: {},
@@ -63,20 +63,15 @@ class SongList extends Component<Props, State> {
           <div className='divider'/>
           <div className='song_container'>
             {
-              songs.map((song) => {
+              songs.map((song, idx) => {
                 const duration = song.attributes.durationInMillis;
-                let secs = '' + Math.floor((duration / 1000) % 60);
-                while (secs.length < 2) {
-                  secs = '0' + secs;
-                }
-                const mins = Math.floor((duration / 1000) / 60);
 
                 return (<div key={song.id} className='song' onClick={() => {
-                    playMedia(song)
+                    playCollection(songs.slice(idx));
                   }}>
                   <span className='song_number'>{song.attributes.trackNumber}</span>
                   {song.attributes.name}
-                  <span className='song_length'>{mins}:{secs}</span>
+                  <span className='song_length'>{formatTimeMs(duration)}</span>
                 </div>);
               })
             }

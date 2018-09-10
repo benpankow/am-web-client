@@ -40,9 +40,9 @@ class App extends Component<State> {
       {
         authorized
           ? (<div>
-              <MediaBar music={MusicKit.getInstance()}/>
-              <AlbumList music={MusicKit.getInstance()}/>
-            </div>)
+            <MediaBar music={MusicKit.getInstance()}/>
+            <AlbumList music={MusicKit.getInstance()}/>
+          </div>)
           : 'false'
       }
     </div>);
