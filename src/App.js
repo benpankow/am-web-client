@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import AlbumList from './AlbumList';
+import MediaBar from './MediaBar';
+import './App.css';
 import {DEVELOPER_TOKEN} from './secrets'
 
 type State = {
@@ -35,10 +37,12 @@ class App extends Component<State> {
   render() {
     const {authorized} = this.state;
     return (<div className="App">
-
       {
         authorized
-          ? <AlbumList music={MusicKit.getInstance()}/>
+          ? (<div>
+              <MediaBar music={MusicKit.getInstance()}/>
+              <AlbumList music={MusicKit.getInstance()}/>
+            </div>)
           : 'false'
       }
     </div>);

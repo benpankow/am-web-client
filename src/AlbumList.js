@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import Album from './Album';
-import './AlbumList.css';
 
 type Props = {
   music: MusicKit

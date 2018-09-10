@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import SongList from './SongList';
-import './Album.css';
 
 type Props = {
   album: {},
