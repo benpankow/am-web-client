@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import SongList from './SongList';
 import './Album.css';
 
@@ -6,7 +6,7 @@ type Props = {
   album: {},
   onSelected: string,
   isSelected: boolean,
-  music: string,
+  music: string
 }
 
 class Album extends Component<Props> {
@@ -18,17 +18,16 @@ class Album extends Component<Props> {
 
     let title = album.attributes.name;
 
-    return (
-      <div className='album' onClick={onSelected}>
-        <img className='album_art' src={urlFormatted}/>
-        <div className='album_title'>{title}</div>
-        <div className='album_artist'>{album.attributes.artistName}</div>
-        {isSelected ?
-          <SongList album={album} url={urlFormatted} music={music}/>
+    return (<div className='album' onClick={onSelected}>
+      <img className='album_art' src={urlFormatted}/>
+      <div className='album_title'>{title}</div>
+      <div className='album_artist'>{album.attributes.artistName}</div>
+      {
+        isSelected
+          ? <SongList album={album} url={urlFormatted} music={music}/>
           : ''
-        }
-      </div>
-    );
+      }
+    </div>);
   }
 }
 

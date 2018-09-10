@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import Album from './Album';
 import './AlbumList.css';
 
 type Props = {
-  music: MusicKit,
+  music: MusicKit
 }
 
 type State = {
   albums: [],
-  selected: ?number,
+  selected:
+    ?number
 }
 
 class AlbumList extends Component<Props, State> {
   state = {
     albums: [],
-    selected: null,
+    selected: null
   };
 
   componentDidMount() {
@@ -26,12 +27,13 @@ class AlbumList extends Component<Props, State> {
     const {music} = this.props;
     const self = this;
 
-    music.api.library.albums(null, { offset: offset, limit: 100 }).then(function(cloudAlbums) {
+    music.api.library.albums(null, {
+      offset: offset,
+      limit: 100
+    }).then(function(cloudAlbums) {
       const appendedList = currentList.concat(cloudAlbums);
 
-      self.setState({
-        albums: appendedList
-      });
+      self.setState({albums: appendedList});
 
       console.log(appendedList);
 
@@ -46,22 +48,17 @@ class AlbumList extends Component<Props, State> {
     const {selected, albums} = this.state;
 
     if (idx == selected) {
-      this.setState({
-        selected: null
-      });
+      this.setState({selected: null});
       music.stop();
     } else {
-      this.setState({
-        selected: idx
-      });
+      this.setState({selected: idx});
 
       const params = albums[idx].attributes.playParams;
       music.setQueue({
         [params.kind]: params.id
       }).then(queue => {
         music.play();
-      }, err => {
-      });
+      }, err => {});
     }
 
   }
@@ -69,22 +66,17 @@ class AlbumList extends Component<Props, State> {
   render() {
     const {albums, selected} = this.state;
     const {music} = this.props;
-    return (
-      <div className='container'>
-        {albums.length > 0 ? albums.map(
-          (album, idx) => {
-            return (
-              <Album
-                key={album.id}
-                music={music}
-                album={album}
-                onSelected={() => {this.onSelected(idx)}}
-                isSelected={selected == idx}/>
-            );
-          }
-        ) : 'Loading albums...'}
-      </div>
-    );
+    return (<div className='container'>
+      {
+        albums.length > 0
+          ? albums.map((album, idx) => {
+            return (<Album key={album.id} music={music} album={album} onSelected={() => {
+                this.onSelected(idx)
+              }} isSelected={selected == idx}/>);
+          })
+          : 'Loading albums...'
+      }
+    </div>);
   }
 }
 
