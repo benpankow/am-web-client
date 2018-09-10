@@ -84,7 +84,12 @@ class SongList extends Component<Props, State> {
       </div>
       <div className='song_list_spacer' style={{
           height: height
-        }}></div>
+        }}>
+        <div className='trapezoid'/>
+        <div className='trapezoid_r'/>
+        <div className='left_bar'/>
+        <div className='right_bar'/>
+      </div>
     </div>);
   }
 }
