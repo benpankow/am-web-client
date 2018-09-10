@@ -18,8 +18,8 @@ class Album extends Component<Props> {
 
     let title = album.attributes.name;
 
-    return (<div className='album' onClick={onSelected}>
-      <img className='album_art' src={urlFormatted}/>
+    return (<div className='album'>
+      <img className='album_art' src={urlFormatted} onClick={onSelected}/>
       <div className='album_title'>{title}</div>
       <div className='album_artist'>{album.attributes.artistName}</div>
       {

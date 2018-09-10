@@ -52,13 +52,6 @@ class AlbumList extends Component<Props, State> {
       music.stop();
     } else {
       this.setState({selected: idx});
-
-      const params = albums[idx].attributes.playParams;
-      music.setQueue({
-        [params.kind]: params.id
-      }).then(queue => {
-        music.play();
-      }, err => {});
     }
 
   }
