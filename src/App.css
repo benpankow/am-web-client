@@ -240,7 +240,7 @@ html, body {
 
 .playing_details_wrap {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1370px;
   position: relative;
   height: 100%;
   display: inline-block;
@@ -253,13 +253,14 @@ html, body {
   background-color: #EEEEEE;
   border-left: 1px solid #BBBBBB;
   border-right: 1px solid #BBBBBB;
-  left: 100px;
-  right: 100px;
+  left: 185px;
+  right: 185px;
 }
 
 .controls {
   position: absolute;
   left: 25px;
+  z-index: 5;
 }
 
 .media_button, .media_button_small {
