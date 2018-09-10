@@ -72,3 +72,15 @@ export function prevItem() {
   const player = music.player;
   player.skipToPreviousItem();
 }
+
+export function getVolume() {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+  return player.volume;
+}
+
+export function setVolume(newVolume) {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+  player.volume = newVolume;
+}

@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
-import {formatTime, playPause, isPlaying, nextItem, prevItem} from './utils';
+import './slider.css';
+import {
+  formatTime,
+  playPause,
+  isPlaying,
+  nextItem,
+  prevItem,
+  getVolume,
+  setVolume
+} from './utils';
 
 type Props = {
   music: MusicKit
@@ -15,6 +24,10 @@ class MediaBar extends Component<Props, State> {
     setInterval(() => {
       this.setState(this.state)
     }, 1);
+  }
+
+  volumeSliderChange = (event) => {
+    setVolume(event.target.value / 100);
   }
 
   render() {
@@ -56,6 +69,7 @@ class MediaBar extends Component<Props, State> {
           <div className='media_button_small' onClick={nextItem}>
             <i className={'material-icons'}>fast_forward</i>
           </div>
+          <input type='range' min='0' max='100' className='volume' value={getVolume() * 100} onChange={this.volumeSliderChange}/>
         </div>
         <div className='playing_details_wrap'>
           <div className='playing_details'>

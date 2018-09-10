@@ -240,7 +240,7 @@ html, body {
 
 .playing_details_wrap {
   width: 100%;
-  max-width: 1370px;
+  max-width: 1700px;
   position: relative;
   height: 100%;
   display: inline-block;
@@ -253,8 +253,8 @@ html, body {
   background-color: #EEEEEE;
   border-left: 1px solid #BBBBBB;
   border-right: 1px solid #BBBBBB;
-  left: 185px;
-  right: 185px;
+  left: 350px;
+  right: 350px;
 }
 
 .controls {
@@ -331,4 +331,10 @@ html, body {
   to {
     width: 1.25em;
   }
+}
+
+.volume {
+  width: 120px;
+  height: 38px;
+  margin-left: 25px;
 }
