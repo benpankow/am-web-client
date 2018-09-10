@@ -66,7 +66,11 @@ class AlbumList extends Component<Props, State> {
                 this.onSelected(idx)
               }} isSelected={selected == idx}/>);
           })
-          : 'Loading albums...'
+          : <div className="center">
+              <div className="centerInner">
+                <span className="loading">Loading Albums</span>
+              </div>
+            </div>
       }
     </div>);
   }

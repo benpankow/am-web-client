@@ -21,8 +21,8 @@ class App extends Component<State> {
     MusicKit.configure({
       developerToken: DEVELOPER_TOKEN,
       app: {
-        name: 'My Cool Web App',
-        build: '1978.4.1'
+        name: 'Apple Music Web Player',
+        build: '0.0.1'
       }
     });
     let music = MusicKit.getInstance();
