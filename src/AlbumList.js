@@ -42,26 +42,33 @@ class AlbumList extends Component<Props, State> {
   }
 
   onSelected = (idx) => {
-    if (idx == this.state.selected) {
+    const {music} = this.props;
+    const {selected, albums} = this.state;
+
+    if (idx == selected) {
       this.setState({
         selected: null
       });
+      music.stop();
     } else {
-      if (this.state.selected !== null) {
-        this.setState({
-          selected: idx
-        });
-      } else {
-        this.setState({
-          selected: idx
-        });
-      }
+      this.setState({
+        selected: idx
+      });
+
+      const params = albums[idx].attributes.playParams;
+      music.setQueue({
+        [params.kind]: params.id
+      }).then(queue => {
+        music.play();
+      }, err => {
+      });
     }
 
   }
 
   render() {
     const {albums, selected} = this.state;
+    const {music} = this.props;
     return (
       <div className='container'>
         {albums.length > 0 ? albums.map(
@@ -69,6 +76,7 @@ class AlbumList extends Component<Props, State> {
             return (
               <Album
                 key={album.id}
+                music={music}
                 album={album}
                 onSelected={() => {this.onSelected(idx)}}
                 isSelected={selected == idx}/>

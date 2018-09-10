@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 type Props = {
   album: {},
   url: string,
+  music: string,
 }
 
 type State = {
@@ -20,6 +21,10 @@ class SongList extends Component<Props, State> {
   }
 
   componentDidMount() {
+    const {music, album} = this.props;
+    music.api.library.album(album.id).then(function(result) {
+      console.log(result);
+    });
     this.setState({height: this.songListRef.current.offsetHeight});
   }
 
