@@ -4,7 +4,8 @@ import {playMedia, formatTimeMs, playCollection} from './utils';
 type Props = {
   album: {},
   url: string,
-  music: string
+  music: string,
+  currentSong: ?string
 }
 
 type State = {
@@ -49,9 +50,7 @@ class SongList extends Component<Props, State> {
 
   render() {
     const {height, songs} = this.state;
-    const {album, url} = this.props;
-
-    console.log('Rerender' + songs.length);
+    const {album, url, currentSong} = this.props;
 
     return (<div>
       <div ref={this.songListRef} className='song_list'>
@@ -69,7 +68,7 @@ class SongList extends Component<Props, State> {
                 return (<div key={song.id} className='song' onClick={() => {
                     playCollection(songs.slice(idx));
                   }}>
-                  <span className='song_number'>{song.attributes.trackNumber}</span>
+                  <span className='song_number'>{currentSong && song.id == currentSong._container.id ? <i className='material-icons'>volume_up</i> : song.attributes.trackNumber}</span>
                   {song.attributes.name}
                   <span className='song_length'>{formatTimeMs(duration)}</span>
                 </div>);

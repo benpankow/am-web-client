@@ -3,7 +3,8 @@ import MusicKit from './musickitService';
 import Album from './Album';
 
 type Props = {
-  music: MusicKit
+  music: MusicKit,
+  currentSong: ?string
 }
 
 type State = {
@@ -57,14 +58,14 @@ class AlbumList extends Component<Props, State> {
 
   render() {
     const {albums, selected} = this.state;
-    const {music} = this.props;
+    const {music, currentSong} = this.props;
     return (<div className='container'>
       {
         albums.length > 0
           ? albums.map((album, idx) => {
             return (<Album key={album.id} music={music} album={album} onSelected={() => {
                 this.onSelected(idx)
-              }} isSelected={selected == idx}/>);
+              }} isSelected={selected == idx} currentSong={currentSong}/>);
           })
           : <div className="center">
               <div className="centerInner">

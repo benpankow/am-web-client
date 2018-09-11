@@ -6,16 +6,17 @@ import './App.css';
 import {DEVELOPER_TOKEN} from './secrets'
 
 type State = {
-  authorized: boolean
+  authorized: boolean,
+  currentSong: ?string
 }
 
 class App extends Component<State> {
   state = {
-    authorized: false
+    authorized: false,
+    currentSong: null
   };
 
   componentDidMount() {
-    console.log('bule');
     const dis = this;
     /* document.addEventListener('musickitloaded', function() { */
     MusicKit.configure({
@@ -26,22 +27,26 @@ class App extends Component<State> {
       }
     });
     let music = MusicKit.getInstance();
-    console.log('befool');
-    // This ensures user authorization before calling play():
+
     music.authorize().then(function() {
       dis.setState({authorized: true});
     });
     /* }); */
+
+    music.addEventListener('mediaItemDidChange', function(event) {
+      console.log(event.item);
+      dis.setState({currentSong: event.item});
+    });
   }
 
   render() {
-    const {authorized} = this.state;
+    const {authorized, currentSong} = this.state;
     return (<div className="App">
       {
         authorized
           ? (<div>
             <MediaBar music={MusicKit.getInstance()}/>
-            <AlbumList music={MusicKit.getInstance()}/>
+            <AlbumList music={MusicKit.getInstance()} currentSong={currentSong}/>
           </div>)
           : 'false'
       }

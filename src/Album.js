@@ -1,14 +1,23 @@
 import React, {Component} from 'react';
 import SongList from './SongList';
+import MusicKit from './musickitService';
 
 type Props = {
   album: {},
   onSelected: string,
   isSelected: boolean,
-  music: string
+  music: string,
+  currentSong: ?string
 }
 
 class Album extends Component<Props> {
+
+  renderSongList = (urlFormatted) => {
+    const {album, onSelected, isSelected, music, currentSong} = this.props;
+
+    return <SongList album={album} url={urlFormatted} music={music} currentSong={currentSong}/>
+  }
+
   render() {
     const {album, onSelected, isSelected, music} = this.props;
     const url = album.attributes.artwork.url;
@@ -23,7 +32,7 @@ class Album extends Component<Props> {
       <div className='album_artist'>{album.attributes.artistName}</div>
       {
         isSelected
-          ? <SongList album={album} url={urlFormatted} music={music}/>
+          ? this.renderSongList(urlFormatted)
           : ''
       }
     </div>);

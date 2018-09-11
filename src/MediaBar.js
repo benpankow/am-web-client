@@ -23,7 +23,7 @@ class MediaBar extends Component<Props, State> {
   componentDidMount() {
     setInterval(() => {
       this.setState(this.state)
-    }, 1);
+    }, 100);
   }
 
   volumeSliderChange = (event) => {
