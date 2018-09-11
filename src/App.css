@@ -185,7 +185,7 @@ html, body {
 .song_number {
   display: inline-block;
   margin-right: 10px;
-  width: 20px;
+  width: 18px;
   text-align: right;
   color: #333333;
   position: relative;
@@ -205,10 +205,30 @@ html, body {
   margin-bottom: 10px;
 }
 
+.song:first-child {
+  margin-top: 4px;
+}
+
 .song {
   font-size: 14px;
-  margin-top: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   cursor: pointer;
+  position: relative;
+}
+
+.song.selected::before {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.125);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  left: -10px;
+  top: -1px;
+  bottom: -1px;
+  right: -10px;
+  content: '';
+  display: inline-block;
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .song_length {
@@ -412,4 +432,13 @@ html, body {
   width: 120px;
   height: 38px;
   margin-left: 25px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -45,9 +45,11 @@ class MediaBar extends Component<Props, State> {
 
     if (queue._items.length > 0) {
       const currentSong = queue._items[queue._position];
-      url = currentSong.attributes.artwork.url;
-      url = url.replace('{w}', 500);
-      url = url.replace('{h}', 500);
+      if (currentSong.attributes.artwork) {
+        url = currentSong.attributes.artwork.url;
+        url = url.replace('{w}', 500);
+        url = url.replace('{h}', 500);
+      }
       title = currentSong.attributes.name;
       artist = currentSong.attributes.artistName;
       album = currentSong.attributes.albumName;

@@ -5,18 +5,21 @@ type Props = {
   album: {},
   url: string,
   music: string,
-  currentSong: ?string
+  currentSong:
+    ?string
 }
 
 type State = {
   height: number,
+  selectedSong: number,
   songs: []
 }
 
 class SongList extends Component<Props, State> {
   state = {
     height: 0,
-    songs: []
+    songs: [],
+    selectedSong: null
   };
   updatingHeight = false;
 
@@ -48,8 +51,17 @@ class SongList extends Component<Props, State> {
     }
   }
 
+  clickSong = (idx) => {
+    const {songs, selectedSong} = this.state;
+    if (idx == selectedSong) {
+      playCollection(songs.slice(idx));
+    } else {
+      this.setState({selectedSong: idx});
+    }
+  }
+
   render() {
-    const {height, songs} = this.state;
+    const {height, songs, selectedSong} = this.state;
     const {album, url, currentSong} = this.props;
 
     return (<div>
@@ -65,10 +77,17 @@ class SongList extends Component<Props, State> {
               songs.map((song, idx) => {
                 const duration = song.attributes.durationInMillis;
 
-                return (<div key={song.id} className='song' onClick={() => {
-                    playCollection(songs.slice(idx));
+                return (<div key={song.id} className={idx == selectedSong
+                    ? 'song selected noselect'
+                    : 'song noselect'} onClick={() => {
+                    this.clickSong(idx)
                   }}>
-                  <span className='song_number'>{currentSong && song.id == currentSong._container.id ? <i className='material-icons'>volume_up</i> : song.attributes.trackNumber}</span>
+
+                  <span className='song_number'>{
+                      currentSong && song.id == currentSong._container.id
+                        ? <i className='material-icons'>volume_up</i>
+                        : song.attributes.trackNumber
+                    }</span>
                   {song.attributes.name}
                   <span className='song_length'>{formatTimeMs(duration)}</span>
                 </div>);
