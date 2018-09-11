@@ -5,15 +5,18 @@ html, body {
   height: 100%;
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   background-color: #FFFFFF;
+  overflow-y: hidden;
 }
 
 .container {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
-  height: 100%;
   overflow-x: hidden;
+  position: relative;
+  overflow-y: scroll;
+  flex: 1;
+  margin-top: 60px;
 }
 
 .album {
@@ -46,7 +49,7 @@ html, body {
 .album_artist {
   margin-top: 3px;
   font-size: 14px;
-  color: grey;
+  color: #888888;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -66,6 +69,10 @@ html, body {
   overflow: hidden;
   border-top: 1px solid #CCCCCC;
   border-bottom: 1px solid #CCCCCC;
+}
+
+.song_list.no_blur {
+  background-color: #DDDDDD;
 }
 
 .song_list.hidden {
@@ -174,8 +181,13 @@ html, body {
   padding-right: 30px;
 }
 
-.title {
+.album_title_detail {
   font-size: 24px;
+}
+
+.album_artist_detail {
+  font-size: 16px;
+  margin-top: 4px;
 }
 
 .song_number {
@@ -197,7 +209,7 @@ html, body {
 .divider {
   width: 100%;
   border-top: 1px solid #333333;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -244,6 +256,12 @@ html, body {
   background-position: center;
 }
 
+.no_blur .blur {
+  display: none;
+  filter: none;
+  transform: none;
+}
+
 .media_bar {
   height: 60px;
   width: 100%;
@@ -258,6 +276,7 @@ html, body {
 
 .media_bar_padding {
   height: 60px;
+  width: 100%;
 }
 
 .media_bar_art {
@@ -431,6 +450,25 @@ html, body {
   margin-left: 25px;
 }
 
+.sidebar {
+  margin-top: 60px;
+  position: relative;
+  background-color: #FFFFFF;
+  border-right: 1px solid #AAAAAA;
+  flex: 0 0 249px;
+  padding: 8px 10px;
+  overflow: hidden;
+}
+
+.drag_bar {
+  position: absolute;
+  right: -1px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  cursor: col-resize;
+}
+
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -438,4 +476,115 @@ html, body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+#app, .App, .fullheight {
+  height: 100%;
+}
+
+.main_cols {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.sidebar_category {
+  color: #666666;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.sidebar_entry {
+  color: #333333;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  margin-left: -10px;
+  margin-right: -10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sidebar_entry .material-icons {
+  position: absolute;
+  left: 15px;
+  top: 4px;
+  margin-right: 5px;
+  font-size: 20px;
+  color: #666666;
+}
+
+.sidebar_entry.selected {
+  color: white;
+  background-color: #2987F0;
+}
+
+.sidebar_entry.selected .material-icons {
+  color: white;
+}
+
+.sidebar_entry.disabled {
+  color: #AAAAAA;
+  cursor: inherit;
+}
+
+.sidebar_entry.disabled .material-icons {
+  color: #CCCCCC;
+}
+
+.sidebar_entries {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+}
+
+.sign_in_container {
+  text-align: center;
+  flex: 1;
+  margin-top: 60px;
+  font-size: 24px;
+}
+
+.sign_in_container_inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  padding: 5px 10px;
+  background-color: #2987F0;
+  display: inline-block;
+  border-radius: 10px;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.sign_in_text {
+  margin-bottom: 20px;
+}
+
+.settings_container {
+  flex: 1;
+  margin-top: 60px;
+}
+
+.settings_inner {
+  max-width: 1000px;
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }

@@ -4,7 +4,8 @@ import Album from './Album';
 
 type Props = {
   music: MusicKit,
-  currentSong: ?string
+  currentSong: ?string,
+  settings: {}
 }
 
 type State = {
@@ -49,7 +50,6 @@ class AlbumList extends Component<Props, State> {
 
     if (idx == selected) {
       this.setState({selected: null});
-      music.stop();
     } else {
       this.setState({selected: idx});
     }
@@ -58,14 +58,14 @@ class AlbumList extends Component<Props, State> {
 
   render() {
     const {albums, selected} = this.state;
-    const {music, currentSong} = this.props;
+    const {music, currentSong, settings} = this.props;
     return (<div className='container'>
       {
         albums.length > 0
           ? albums.map((album, idx) => {
             return (<Album key={album.id} music={music} album={album} onSelected={() => {
                 this.onSelected(idx)
-              }} isSelected={selected == idx} currentSong={currentSong}/>);
+              }} isSelected={selected == idx} currentSong={currentSong} settings={settings}/>);
           })
           : <div className="center">
               <div className="centerInner">

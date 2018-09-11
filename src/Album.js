@@ -7,15 +7,16 @@ type Props = {
   onSelected: string,
   isSelected: boolean,
   music: string,
-  currentSong: ?string
+  currentSong: ?string,
+  settings: {}
 }
 
 class Album extends Component<Props> {
 
   renderSongList = (urlFormatted) => {
-    const {album, onSelected, isSelected, music, currentSong} = this.props;
+    const {album, onSelected, isSelected, music, currentSong, settings} = this.props;
 
-    return <SongList album={album} url={urlFormatted} music={music} currentSong={currentSong}/>
+    return <SongList album={album} url={urlFormatted} music={music} currentSong={currentSong} settings={settings}/>
   }
 
   render() {

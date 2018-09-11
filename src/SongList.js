@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {playMedia, formatTimeMs, playCollection} from './utils';
+import {playMedia, formatTimeMs, playCollection} from './musickitUtils';
 
 type Props = {
   album: {},
   url: string,
   music: string,
   currentSong:
-    ?string
+    ?string,
+  settings: {}
 }
 
 type State = {
@@ -62,15 +63,18 @@ class SongList extends Component<Props, State> {
 
   render() {
     const {height, songs, selectedSong} = this.state;
-    const {album, url, currentSong} = this.props;
+    const {album, url, currentSong, settings} = this.props;
 
     return (<div>
-      <div ref={this.songListRef} className='song_list'>
+      <div ref={this.songListRef} className={'song_list' + (settings.coloredBackground
+          ? ''
+          : ' no_blur')}>
         <div className='blur' style={{
             backgroundImage: "url(" + url + ")"
           }}/>
         <div className={'song_list_l padding10'}>
-          <div className='title'>{album.attributes.name}</div>
+          <div className='album_title_detail'>{album.attributes.name}</div>
+          <div className='album_artist_detail'>{album.attributes.artistName}</div>
           <div className='divider'/>
           <div className='song_container'>
             {
