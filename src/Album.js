@@ -26,11 +26,15 @@ class Album extends Component<Props> {
     urlFormatted = urlFormatted.replace('{h}', 500);
 
     let title = album.attributes.name;
+    let artist = album.attributes.artistName;
+    if (!artist) {
+      artist = 'Unknown Artist';
+    }
 
     return (<div className='album'>
       <img className='album_art' src={urlFormatted} onClick={onSelected}/>
       <div className='album_title'>{title}</div>
-      <div className='album_artist'>{album.attributes.artistName}</div>
+      <div className='album_artist'>{artist}</div>
       {
         isSelected
           ? this.renderSongList(urlFormatted)

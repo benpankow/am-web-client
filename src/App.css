@@ -579,6 +579,7 @@ html, body {
 .settings_container {
   flex: 1;
   margin-top: 60px;
+  color: #000000;
 }
 
 .settings_inner {
@@ -591,8 +592,9 @@ html, body {
 }
 
 .dark_theme .media_bar {
-  background-image: linear-gradient(to bottom, #333333, #111111);
-  border-bottom: 1px solid #333333;
+  background-image: none;
+  background-color: #3F3F3F;
+  border-bottom: 1px solid #111111;
 }
 
 .dark_theme .sidebar_entry {
@@ -608,19 +610,18 @@ html, body {
 }
 
 .dark_theme .sidebar {
-  background-color: #111111;
-  border-right: 1px solid #333333;
+  background-color: #333333;
+  border-right: 1px solid #111111;
 }
 
 .dark_theme .media_button, .dark_theme .media_button_small {
-  opacity: .9;
   color: #FFFFFF;
 }
 
 .dark_theme .playing_details {
-  background-color: #111111;
-  border-left: 1px solid #444444;
-  border-right: 1px solid #444444;
+  background-color: #252525;
+  border-left: 1px solid #111111;
+  border-right: 1px solid #111111;
 }
 
 .dark_theme .current_song_info {
@@ -639,11 +640,6 @@ html, body {
   color: #FFFFFF;
 }
 
-.dark_theme .media_bar {
-  background-image: linear-gradient(to bottom, #333333, #111111);
-  border-bottom: 1px solid #333333;
-}
-
 .dark_theme .blur {
   opacity: 0.5;
 }
@@ -653,8 +649,8 @@ html, body {
 }
 
 .dark_theme .song.selected::before {
-  background-color: rgba(255, 255, 255, 0.125);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .dark_theme .song_length {
@@ -678,26 +674,34 @@ html, body {
 }
 
 .dark_theme .trapezoid::after, .dark_theme .trapezoid_r::after {
-  background-color: #111111;
+  background-color: #222222;
 }
 
 .dark_theme .left_bar::after, .dark_theme .right_bar::after {
-  background-color: #111111;
+  background-color: #222222;
 }
 
 .dark_theme .song_list {
-  border-top: 1px solid #444444;
-  border-bottom: 1px solid #444444;
+  border-top: 1px solid #111111;
+  border-bottom: 1px solid #111111;
 }
 
 .dark_theme .album_title {
   color: #FFFFFF;
 }
 
-.dark_theme .container {
-  background-color: #111111;
+.dark_theme.App {
+  background-color: #222222;
 }
 
 .dark_theme .progress_outer {
-  background-color: #444444;
+  background-color: #353535;
+}
+
+.dark_theme .song_list.no_blur {
+  background-color: #151515;
+}
+
+.dark_theme .settings_container {
+  color: #FFFFFF;
 }

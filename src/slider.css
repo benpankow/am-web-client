@@ -64,3 +64,20 @@ input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
+
+
+.dark_theme input[type=range]::-moz-range-track {
+  background-image: linear-gradient(to bottom, #222222, #111111);
+}
+
+.dark_theme input[type=range]::-ms-range-track {
+  background-image: linear-gradient(to bottom, #222222, #111111);
+}
+
+.dark_theme input[type=range]::-webkit-slider-runnable-track {
+  background-image: linear-gradient(to bottom, #222222, #111111);
+}
+
+.dark_theme input[type=range]::-moz-range-progress {
+  background-color: #AAAAAA;
+}
