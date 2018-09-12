@@ -81,8 +81,8 @@ class App extends Component<State> {
   }
 
   render() {
-    const {authorized, currentSong, page} = this.state;
-    return (<div className="App">
+    const {authorized, currentSong, page, settings} = this.state;
+    return (<div className={'App' + (settings.darkTheme ? ' dark_theme' : '')}>
       <div className={'fullheight noselect'}>
         {
           authorized

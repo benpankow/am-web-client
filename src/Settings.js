@@ -16,7 +16,12 @@ class Settings extends Component<Props, State> {
       <div className='settings_inner'>
         <input type="checkbox" checked={coloredBackground} onChange={(e) => {
             adjustSetting('coloredBackground', e.target.checked)
-          }}/> Display colored backgrounds on albums
+          }}/>
+        Display colored backgrounds on albums
+        <input type="checkbox" checked={darkTheme} onChange={(e) => {
+            adjustSetting('darkTheme', e.target.checked)
+          }}/>
+        Dark theme
       </div>
     </div>;
   }

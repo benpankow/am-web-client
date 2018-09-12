@@ -310,6 +310,7 @@ html, body {
   background-color: #2987F0;
   height: 9px;
   width: 4px;
+  border-radius: 3px;
 }
 
 .progress_outer {
@@ -587,4 +588,116 @@ html, body {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.dark_theme .media_bar {
+  background-image: linear-gradient(to bottom, #333333, #111111);
+  border-bottom: 1px solid #333333;
+}
+
+.dark_theme .sidebar_entry {
+  color: #CCCCCC;
+}
+
+.dark_theme .sidebar_entry .material-icons {
+  color: #999999;
+}
+
+.dark_theme .sidebar_category {
+  color: #999999;
+}
+
+.dark_theme .sidebar {
+  background-color: #111111;
+  border-right: 1px solid #333333;
+}
+
+.dark_theme .media_button, .dark_theme .media_button_small {
+  opacity: .9;
+  color: #FFFFFF;
+}
+
+.dark_theme .playing_details {
+  background-color: #111111;
+  border-left: 1px solid #444444;
+  border-right: 1px solid #444444;
+}
+
+.dark_theme .current_song_info {
+  color: #AAAAAA;
+}
+
+.dark_theme .current_song_time {
+  color: #AAAAAA;
+}
+
+.dark_theme .current_song_time_left {
+  color: #AAAAAA;
+}
+
+.dark_theme .current_song_title {
+  color: #FFFFFF;
+}
+
+.dark_theme .media_bar {
+  background-image: linear-gradient(to bottom, #333333, #111111);
+  border-bottom: 1px solid #333333;
+}
+
+.dark_theme .blur {
+  opacity: 0.5;
+}
+
+.dark_theme .song {
+  color: #FFFFFF;
+}
+
+.dark_theme .song.selected::before {
+  background-color: rgba(255, 255, 255, 0.125);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark_theme .song_length {
+  color: #CCCCCC;
+}
+
+.dark_theme .album_title_detail {
+  color: #FFFFFF;
+}
+
+.dark_theme .album_artist_detail {
+  color: #FFFFFF;
+}
+
+.dark_theme .song_number {
+  color: #CCCCCC;
+}
+
+.dark_theme .divider {
+  border-top: 1px solid #CCCCCC;
+}
+
+.dark_theme .trapezoid::after, .dark_theme .trapezoid_r::after {
+  background-color: #111111;
+}
+
+.dark_theme .left_bar::after, .dark_theme .right_bar::after {
+  background-color: #111111;
+}
+
+.dark_theme .song_list {
+  border-top: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+}
+
+.dark_theme .album_title {
+  color: #FFFFFF;
+}
+
+.dark_theme .container {
+  background-color: #111111;
+}
+
+.dark_theme .progress_outer {
+  background-color: #444444;
 }
