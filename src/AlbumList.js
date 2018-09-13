@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import Album from './Album';
+import {cacheAlbums} from './mediaFetcher';
 
 type Props = {
   music: MusicKit,
@@ -42,6 +43,12 @@ class AlbumList extends Component<Props, State> {
 
       if (cloudAlbums.length == 100) {
         self.fetchAlbums(offset + 100, appendedList);
+      } else {
+        const albumIds = appendedList.map(album => {
+          return album.id
+        });
+        console.log(albumIds);
+        cacheAlbums(albumIds);
       }
     });
   }

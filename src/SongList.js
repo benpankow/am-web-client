@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {playMedia, formatTimeMs, playCollection} from './musickitUtils';
+import {playMedia, formatTimeMs, playCollection} from './playerUtils';
+import {getAlbum} from './mediaFetcher';
 
 type Props = {
   album: {},
@@ -34,7 +35,7 @@ class SongList extends Component<Props, State> {
 
     const self = this;
 
-    music.api.library.album(album.id).then(function(result) {
+    getAlbum(album.id).then((result) => {
       const songs = result.relationships.tracks.data;
       console.log(songs);
       self.setState({songs: songs});
@@ -66,7 +67,8 @@ class SongList extends Component<Props, State> {
     const {album, url, currentSong, settings} = this.props;
 
     return (<div>
-      <div ref={this.songListRef} className={'song_list' + (settings.coloredBackground
+      <div ref={this.songListRef} className={'song_list' + (
+          settings.coloredBackground
           ? ''
           : ' no_blur')}>
         <div className='blur' style={{

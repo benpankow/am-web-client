@@ -9,7 +9,7 @@ import {
   prevItem,
   getVolume,
   setVolume
-} from './musickitUtils';
+} from './playerUtils';
 
 type Props = {
   music: MusicKit,
