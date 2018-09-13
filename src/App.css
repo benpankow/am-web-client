@@ -16,7 +16,7 @@ html, body {
   position: relative;
   overflow-y: scroll;
   flex: 1;
-  margin-top: 60px;
+  margin-top: 50px;
 }
 
 .album {
@@ -444,7 +444,7 @@ html, body {
 }
 
 .sidebar {
-  margin-top: 60px;
+  margin-top: 50px;
   position: relative;
   background-color: #FFFFFF;
   border-right: 1px solid #AAAAAA;
@@ -542,7 +542,7 @@ html, body {
 .sign_in_container {
   text-align: center;
   flex: 1;
-  margin-top: 60px;
+  margin-top: 50px;
   font-size: 24px;
 }
 
@@ -569,7 +569,7 @@ html, body {
 
 .settings_container {
   flex: 1;
-  margin-top: 60px;
+  margin-top: 50px;
   color: #000000;
 }
 
