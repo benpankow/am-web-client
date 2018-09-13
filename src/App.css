@@ -263,7 +263,7 @@ html, body {
 }
 
 .media_bar {
-  height: 60px;
+  height: 50px;
   width: 100%;
   width: 100%;
   position: fixed;
@@ -275,20 +275,20 @@ html, body {
 }
 
 .media_bar_padding {
-  height: 60px;
+  height: 50px;
   width: 100%;
 }
 
 .media_bar_art {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 
 .media_bar_right {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 60px;
+  left: 50px;
   right: 0;
   text-align: center;
 }
@@ -297,7 +297,7 @@ html, body {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 5px;
+  height: 4px;
   background-color: #2987F0;
 }
 
@@ -308,8 +308,8 @@ html, body {
   right: 0;
   top: -4px;
   background-color: #2987F0;
-  height: 9px;
-  width: 4px;
+  height: 5px;
+  width: 3px;
   border-radius: 3px;
 }
 
@@ -318,18 +318,17 @@ html, body {
   left: 0;
   bottom: 0;
   right: 0;
-  height: 5px;
+  height: 4px;
   background-color: #888888;
 }
 
 .current_song_title {
-  margin-top: 9px;
+  margin-top: 7px;
   font-size: 14px;
-  font-weight: bold;
 }
 
 .current_song_info {
-  margin-top: 5px;
+  margin-top: 2px;
   font-size: 12px;
   color: #555555;
 }
@@ -337,7 +336,7 @@ html, body {
 .current_song_time {
   position: absolute;
   left: 8px;
-  bottom: 12px;
+  bottom: 9px;
   font-size: 12px;
   color: #555555;
 }
@@ -345,7 +344,7 @@ html, body {
 .current_song_time_left {
   position: absolute;
   right: 8px;
-  bottom: 12px;
+  bottom: 9px;
   font-size: 12px;
   color: #555555;
 }
@@ -373,42 +372,35 @@ html, body {
   position: absolute;
   left: 25px;
   z-index: 11;
+  top: 0;
 }
 
 .media_button, .media_button_small {
   width: 44px;
   height: 44px;
-  margin-top: 8px;
+  margin-top: 3px;
   text-align: center;
   overflow: hidden;
   cursor: pointer;
   opacity: .7;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .media_button .material-icons, .media_button_small .material-icons {
-  margin-top: -5px;
-  margin-left: -6px;
-  font-size: 56px;
+  margin-top: -2px;
+  margin-left: -2px;
+  font-size: 48px;
 }
 
 .media_button_small {
   width: 36px;
-  height: 44px;
-  margin-top: 8px;
-  text-align: center;
-  overflow: hidden;
-  cursor: pointer;
-  opacity: .7;
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .media_button_small .material-icons {
-  margin-top: 3px;
+  margin-top: 4px;
   margin-left: -3px;
-  font-size: 40px;
+  font-size: 36px;
 }
 
 .center {
@@ -448,7 +440,7 @@ html, body {
 .volume {
   width: 120px;
   height: 38px;
-  margin-left: 25px;
+  margin-left: 45px;
 }
 
 .sidebar {
@@ -493,7 +485,7 @@ html, body {
   color: #666666;
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 
 .sidebar_entry {
@@ -501,7 +493,7 @@ html, body {
   height: 28px;
   line-height: 28px;
   padding-left: 42px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   position: relative;
   margin-left: -10px;
@@ -512,10 +504,9 @@ html, body {
 
 .sidebar_entry .material-icons {
   position: absolute;
-  left: 15px;
-  top: 4px;
-  margin-right: 5px;
-  font-size: 20px;
+  left: 18px;
+  top: 5px;
+  font-size: 18px;
   color: #666666;
 }
 
