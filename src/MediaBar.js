@@ -12,7 +12,9 @@ import {
 } from './musickitUtils';
 
 type Props = {
-  music: MusicKit
+  music: MusicKit,
+  filter: string,
+  setFilter: {}
 }
 
 type State = {}
@@ -31,7 +33,7 @@ class MediaBar extends Component<Props, State> {
   }
 
   render() {
-    const {music} = this.props;
+    const {music, filter, setFilter} = this.props;
     const pct = (music.player.currentPlaybackTime / music.player.currentPlaybackDuration) * 100;
 
     const queue = music.player.queue;
@@ -94,6 +96,12 @@ class MediaBar extends Component<Props, State> {
             </div>
           </div>
         </div>
+      </div>
+      <div className='search_bar_wrapper'>
+        <i className='material-icons'>filter_list</i>
+        <input className='search_bar' type='text' placeholder='Filter' value={filter} onChange={(e) => {
+            setFilter(e.target.value);
+          }}/>
       </div>
     </div>);
   }

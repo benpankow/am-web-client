@@ -15,7 +15,9 @@ type State = {
   settings: {
     coloredBackground: boolean,
     darkTheme: boolean,
-  }
+  },
+  displayFilter: string,
+  filter: string,
 }
 
 class App extends Component<State> {
@@ -26,8 +28,11 @@ class App extends Component<State> {
     settings: {
       coloredBackground: true,
       darkTheme: false
-    }
+    },
+    displayFilter: '',
+    filter: '',
   };
+  timeoutHandle = null;
 
   authorize = () => {
     const music = MusicKit.getInstance();
@@ -63,6 +68,18 @@ class App extends Component<State> {
     this.setState({page: page});
   }
 
+  setFilter = (filter) => {
+    this.setState({displayFilter: filter});
+
+    if (this.timeoutHandle) {
+      window.clearTimeout(this.timeoutHandle);
+      this.timeoutHandle = null;
+    }
+    this.timeoutHandle = window.setTimeout(() => {
+      this.setState({filter: filter});
+    }, 300);
+  }
+
   adjustSetting = (name, value) => {
     let {settings} = this.state;
     settings[name] = value;
@@ -70,9 +87,9 @@ class App extends Component<State> {
   }
 
   renderPage = () => {
-    const {authorized, currentSong, page, settings} = this.state;
+    const {authorized, currentSong, page, settings, filter} = this.state;
     if (page == 'albums') {
-      return (<AlbumList music={MusicKit.getInstance()} currentSong={currentSong} settings={settings}/>);
+      return (<AlbumList music={MusicKit.getInstance()} currentSong={currentSong} settings={settings} filter={filter}/>);
     } else if (page == 'settings') {
       return (<Settings settings={settings} adjustSetting={this.adjustSetting}/>);
     } else {
@@ -81,12 +98,12 @@ class App extends Component<State> {
   }
 
   render() {
-    const {authorized, currentSong, page, settings} = this.state;
+    const {authorized, currentSong, page, settings, displayFilter} = this.state;
     return (<div className={'App' + (settings.darkTheme ? ' dark_theme' : '')}>
       <div className={'fullheight noselect'}>
         {
           authorized
-            ? <MediaBar music={MusicKit.getInstance()}/>
+            ? <MediaBar music={MusicKit.getInstance()} displayFilter={displayFilter} setFilter={this.setFilter}/>
             : ''
         }
         <div className='main_cols'>

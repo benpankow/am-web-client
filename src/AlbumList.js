@@ -4,14 +4,16 @@ import Album from './Album';
 
 type Props = {
   music: MusicKit,
-  currentSong: ?string,
-  settings: {}
+  currentSong:
+    ?string,
+  settings: {},
+  filter: string
 }
 
 type State = {
   albums: [],
   selected:
-    ?number
+    ?string
 }
 
 class AlbumList extends Component<Props, State> {
@@ -53,19 +55,34 @@ class AlbumList extends Component<Props, State> {
     } else {
       this.setState({selected: idx});
     }
-
   }
 
   render() {
     const {albums, selected} = this.state;
-    const {music, currentSong, settings} = this.props;
+    const {music, currentSong, settings, filter} = this.props;
+
+    const filterLower = filter.toLowerCase();
+
+    const validAlbums = albums.filter(album => {
+      const title = album.attributes.name;
+      let artist = album.attributes.artistName;
+      if (!artist) {
+        artist = 'Unknown Artist';
+      }
+
+      if (filterLower.length > 0) {
+        return title.toLowerCase().includes(filterLower) || artist.toLowerCase().includes(filterLower);
+      }
+      return true;
+    });
+
     return (<div className='container'>
       {
         albums.length > 0
-          ? albums.map((album, idx) => {
+          ? validAlbums.map((album, idx) => {
             return (<Album key={album.id} music={music} album={album} onSelected={() => {
-                this.onSelected(idx)
-              }} isSelected={selected == idx} currentSong={currentSong} settings={settings}/>);
+                this.onSelected(album.id)
+              }} isSelected={selected == album.id} currentSong={currentSong} settings={settings}/>);
           })
           : <div className="center">
               <div className="centerInner">
@@ -73,6 +90,21 @@ class AlbumList extends Component<Props, State> {
               </div>
             </div>
       }
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
+      <div className='dummy_album'/>
     </div>);
   }
 }
