@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SongList from "./SongList";
+import AlbumSongs from "./AlbumSongs";
 import MusicKit from "./musickitService";
 
 type Props = {
@@ -24,7 +24,7 @@ class Album extends Component<Props> {
     } = this.props;
 
     return (
-      <SongList
+      <AlbumSongs
         album={album}
         url={urlFormatted}
         music={music}
