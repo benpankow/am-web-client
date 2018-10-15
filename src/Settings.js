@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import Checkbox from "./components/Checkbox";
+
 import MusicKit from "./musickitService";
+import "./style/checkbox.css";
 
 type Props = {
   settings: {},
@@ -16,22 +19,24 @@ class Settings extends Component<Props, State> {
     return (
       <div className="settings_container">
         <div className="settings_inner">
-          <input
-            type="checkbox"
-            checked={coloredBackground}
-            onChange={e => {
-              adjustSetting("coloredBackground", e.target.checked);
-            }}
-          />
-          Display colored backgrounds on albums
-          <input
-            type="checkbox"
-            checked={darkTheme}
-            onChange={e => {
-              adjustSetting("darkTheme", e.target.checked);
-            }}
-          />
-          Dark theme
+          <div className="setting">
+            <Checkbox
+              checked={coloredBackground}
+              onChange={b => {
+                adjustSetting("coloredBackground", b);
+              }}
+            />
+            Display colored backgrounds on albums
+          </div>
+          <div className="setting">
+            <Checkbox
+              checked={darkTheme}
+              onChange={b => {
+                adjustSetting("darkTheme", b);
+              }}
+            />
+            Dark theme
+          </div>
         </div>
       </div>
     );

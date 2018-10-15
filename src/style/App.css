@@ -647,6 +647,10 @@ body {
   box-sizing: border-box;
 }
 
+.setting {
+  margin-bottom: 10px;
+}
+
 .dark_theme .media_bar {
   background-image: none;
   background-color: #3f3f3f;
