@@ -20,6 +20,16 @@ export function playCollection(items) {
   }, err => {});
 }
 
+export function playParams(params) {
+  const music = MusicKit.getInstance();
+
+  music.setQueue({
+    [params.kind]: params.id
+  }).then(queue => {
+    music.play();
+  }, err => {});
+}
+
 export function playMedia(item) {
   const music = MusicKit.getInstance();
 

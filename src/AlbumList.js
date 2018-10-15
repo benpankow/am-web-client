@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import Album from './Album';
-import {cacheAlbums} from './mediaFetcher';
+import {cacheAlbums, fetchAlbumList, getCachedAlbumList} from './mediaFetcher';
 
 type Props = {
   music: MusicKit,
@@ -31,26 +31,14 @@ class AlbumList extends Component<Props, State> {
     const {music} = this.props;
     const self = this;
 
-    music.api.library.albums(null, {
-      offset: offset,
-      limit: 100
-    }).then(function(cloudAlbums) {
-      const appendedList = currentList.concat(cloudAlbums);
+    self.setState({albums: getCachedAlbumList()});
 
-      self.setState({albums: appendedList});
-
-      console.log(appendedList);
-
-      if (cloudAlbums.length == 100) {
-        self.fetchAlbums(offset + 100, appendedList);
-      } else {
-        const albumIds = appendedList.map(album => {
-          return album.id
-        });
-        console.log(albumIds);
-        cacheAlbums(albumIds);
-      }
+    fetchAlbumList((currentList) => {
+      self.setState({albums: currentList});
+    }, () => {
+      console.log('done!');
     });
+
   }
 
   onSelected = (idx) => {

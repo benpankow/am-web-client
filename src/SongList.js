@@ -85,7 +85,7 @@ class SongList extends Component<Props, State> {
 
                 return (<div key={song.id} className={idx == selectedSong
                     ? 'song selected noselect'
-                    : 'song noselect'} onClick={() => {
+                    : 'song noselect'} onMouseDown={() => {
                     this.clickSong(idx)
                   }}>
 

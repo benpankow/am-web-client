@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MusicKit from './musickitService';
 import AlbumList from './AlbumList';
+import SongsList from './SongsList';
 import MediaBar from './MediaBar';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
@@ -90,9 +91,11 @@ class App extends Component<State> {
     const {authorized, currentSong, page, settings, filter} = this.state;
     if (page == 'albums') {
       return (<AlbumList music={MusicKit.getInstance()} currentSong={currentSong} settings={settings} filter={filter}/>);
+    } else if (page == 'songs') {
+      return (<SongsList music={MusicKit.getInstance()} currentSong={currentSong} settings={settings} filter={filter}/>);
     } else if (page == 'settings') {
       return (<Settings settings={settings} adjustSetting={this.adjustSetting}/>);
-    } else {
+    }else {
       return '';
     }
   }

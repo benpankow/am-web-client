@@ -37,7 +37,7 @@ class SidebarEntry extends Component<Props> {
       className += ' selected';
     }
     return (
-        <div className={className} onClick={() => {onClick();}}>
+        <div className={className} onMouseDown={() => {onClick();}}>
           <i className='material-icons'>{iconName}</i>{text}</div>
       );
   }

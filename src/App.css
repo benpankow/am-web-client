@@ -6,6 +6,8 @@ html, body {
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   background-color: #FFFFFF;
   overflow-y: hidden;
+  overflow-x: hidden;
+  ;
 }
 
 .container {
@@ -19,6 +21,13 @@ html, body {
   margin-top: 50px;
   align-items: flex-start;
   align-content: flex-start;
+}
+
+.songs_container {
+  margin-top: 50px;
+  flex: 1;
+  font-size: 14px;
+  position: relative;
 }
 
 .dummy_album {
@@ -362,7 +371,7 @@ html, body {
 
 .playing_details_wrap {
   width: 100%;
-  max-width: 1700px;
+  max-width: 1500px;
   position: relative;
   height: 100%;
   display: inline-block;
@@ -741,4 +750,81 @@ html, body {
 
 .dark_theme .settings_container {
   color: #FFFFFF;
+}
+
+table, tr, th, td {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-collapse: collapse;
+}
+
+
+.header {
+  position: absolute;
+  background-color: #FFFFFF;
+  height: 28px;
+  left: 0px;
+  top: 0px;
+  right: 17px;
+}
+
+.song_table_container, .resizable_table_container {
+  position: absolute;
+  top: 28px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.song_table .material-icons {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  font-size: 16px;
+}
+
+.song_table, .resizable_table {
+  width: 100%;
+}
+
+.songs_container th {
+  padding: 2px 4px 2px 3px;
+  border-bottom: 2px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  font-weight: normal;
+  text-align: left;
+  vertical-align: bottom;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.songs_container td {
+  padding: 3px 4px 2px 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 12px;
+  position: relative;
+}
+
+.songs_container table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+.songs_container tr:nth-child(even) {
+  background-color: #EEEEEE;
+}
+
+.songs_container tr.selected {
+  color: white;
+  background-color: #2987F0;
 }

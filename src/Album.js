@@ -32,7 +32,7 @@ class Album extends Component<Props> {
     }
 
     return (<div className='album'>
-      <img className='album_art' src={urlFormatted} onClick={onSelected}/>
+      <img className='album_art' src={urlFormatted} onMouseDown={onSelected}/>
       <div className='album_title'>{title}</div>
       <div className='album_artist'>{artist}</div>
       {
