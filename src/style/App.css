@@ -521,7 +521,7 @@ body {
   right: -1px;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 5px;
   cursor: col-resize;
 }
 
@@ -847,11 +847,25 @@ td {
   table-layout: fixed;
 }
 
-.songs_container tr:nth-child(even) {
+.songs_container tr.highlight {
   background-color: #eeeeee;
 }
 
 .songs_container tr.selected {
   color: white;
   background-color: #2987f0;
+}
+
+.virtual_list_outer {
+  position: "absolute";
+  overflow: "hidden";
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.virtual_list_inner {
+  display: table;
+  width: 100%;
+  position: absolute;
 }

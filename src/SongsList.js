@@ -78,9 +78,9 @@ class SongsList extends Component<Props, State> {
       return true;
     });
 
-    const rows = validSongs.map(song => {
+    const rows = validSongs.map((song, idx) => {
       return {
-        id: song.id,
+        id: idx,
         name: song.attributes.name,
         time: formatTimeMs(song.attributes.durationInMillis),
         artist: song.attributes.artistName,

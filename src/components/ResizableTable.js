@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ResizableTableRow from "./ResizableTableRow";
+import VirtualList from "./VirtualList";
 
 // Fraction of a percentage of total table width that resizing precision goes to
 const RESIZE_FRAC = 15;
@@ -16,7 +17,8 @@ type State = {
   selected: ?string,
   columnSizes: [],
   sortColumn: number,
-  sortInverted: boolean
+  sortInverted: boolean,
+  listContainerRef: {}
 };
 
 // Table whose columns can be resized
@@ -25,7 +27,8 @@ class ResizableTable extends Component<Props, State> {
     selected: null,
     columnSizes: [],
     sortColumn: 0,
-    sortInverted: false
+    sortInverted: false,
+    listContainerRef: null
   };
   dragStartX = 0;
   baseWidths = 0;
@@ -45,6 +48,7 @@ class ResizableTable extends Component<Props, State> {
 
   // Start resizing this column - bind mouse move/mouseup events
   beginResize = (idx, e) => {
+    e.stopPropagation();
     this.dragStartX = e.clientX;
     document.body.onmousemove = e => {
       this.resize(idx, e);
@@ -197,7 +201,15 @@ class ResizableTable extends Component<Props, State> {
             </tr>
           </thead>
         </table>
-        <div className="resizable_table_container">
+        <div
+          className="resizable_table_container"
+          ref={c => {
+            if (!this.state.listContainerRef) {
+              this.setState({ listContainerRef: c });
+              console.log("updatestate");
+            }
+          }}
+        >
           <table className="resizable_table">
             <colgroup>
               {columns.map((col, idx) => {
@@ -214,20 +226,29 @@ class ResizableTable extends Component<Props, State> {
               })}
             </colgroup>
             <tbody>
-              {rows.map((row, idx) => {
-                // Render each row
-                const click = () => {
-                  this.selectOrClick(row);
-                };
-                return (
-                  <ResizableTableRow
-                    columns={columns}
-                    row={row}
-                    onMouseDown={click}
-                    selected={row.id == selected}
-                  />
-                );
-              })}
+              <VirtualList
+                elementHeight={22}
+                rows={rows}
+                renderRow={(idx, row) => {
+                  // Render each row
+                  const click = () => {
+                    this.selectOrClick(row);
+                  };
+
+                  return (
+                    <ResizableTableRow
+                      columns={columns}
+                      row={row}
+                      onMouseDown={click}
+                      selected={row.id == selected}
+                      key={"$_" + row.id + "_" + row.name}
+                      widths={columnSizes}
+                      highlight={idx % 2 == 0}
+                    />
+                  );
+                }}
+                parentRef={this.state.listContainerRef}
+              />
             </tbody>
           </table>
         </div>

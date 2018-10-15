@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SidebarEntry from "./SidebarEntry";
 
-const MIN_SIDEBAR_SIZE = 500;
+const MAX_SIDEBAR_SIZE = 500;
 
 type Props = {
   setPage: {},
@@ -20,7 +20,7 @@ class Sidebar extends Component<Props, State> {
 
   // Resizes sidebar while dragging
   resize = e => {
-    const newWidth = Math.min(MIN_SIDEBAR_SIZE, e.clientX + 2);
+    const newWidth = Math.min(MAX_SIDEBAR_SIZE, e.clientX + 2);
     this.setState({ width: newWidth });
   };
 
