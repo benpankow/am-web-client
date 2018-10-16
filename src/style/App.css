@@ -351,6 +351,10 @@ body {
 .current_song_title {
   margin-top: 7px;
   font-size: 14px;
+  padding: 0px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .current_song_info {
@@ -521,7 +525,7 @@ body {
   right: -1px;
   top: 0;
   bottom: 0;
-  width: 5px;
+  width: 8px;
   cursor: col-resize;
 }
 
