@@ -5,6 +5,7 @@ import AlbumList from "./AlbumList";
 import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
+import Viz from "./Viz";
 import Sidebar from "./Sidebar";
 import "./style/App.css";
 import { DEVELOPER_TOKEN } from "./secrets";
@@ -109,9 +110,7 @@ class App extends Component<State> {
         />
       );
     } else if (page == "settings") {
-      return (
-        <Settings settings={settings} adjustSetting={this.adjustSetting} />
-      );
+      return <Viz />;
     } else {
       return "";
     }
