@@ -211,20 +211,6 @@ class ResizableTable extends Component<Props, State> {
           }}
         >
           <table className="resizable_table">
-            <colgroup>
-              {columns.map((col, idx) => {
-                // Set up column groups to allow for nice resizing
-                const width = columnSizes[idx] + "%";
-
-                return (
-                  <col
-                    style={{
-                      width: width
-                    }}
-                  />
-                );
-              })}
-            </colgroup>
             <tbody>
               <VirtualList
                 elementHeight={22}

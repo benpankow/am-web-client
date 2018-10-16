@@ -851,11 +851,6 @@ td {
   background-color: #eeeeee;
 }
 
-.songs_container tr.selected {
-  color: white;
-  background-color: #2987f0;
-}
-
 .virtual_list_outer {
   position: "absolute";
   overflow: "hidden";
@@ -868,4 +863,27 @@ td {
   display: table;
   width: 100%;
   position: absolute;
+}
+
+.dark_theme .songs_container {
+  color: #ffffff;
+}
+
+.dark_theme .songs_container tr.highlight {
+  background-color: #2a2a2a;
+}
+
+.dark_theme .header {
+  background-color: #222222;
+}
+
+.dark_theme .songs_container th {
+  border-bottom: 2px solid #444444;
+  border-right: 1px solid #444444;
+}
+
+.dark_theme .songs_container tr.selected,
+.songs_container tr.selected {
+  color: white;
+  background-color: #2987f0;
 }
