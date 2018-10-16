@@ -52,28 +52,6 @@ class Settings extends Component<Props, State> {
             />
             Dark theme
           </div>
-          <div
-            style={{ height: "200px", overflowY: "scroll", resize: "both" }}
-            ref={c => {
-              if (!this.state.parentRef) {
-                console.log("setState");
-                this.setState({ parentRef: c });
-              }
-            }}
-          >
-            <VirtualList
-              elementHeight={20}
-              rows={rows}
-              renderRow={row => {
-                return (
-                  <div style={{ height: "20px" }} key={row}>
-                    {row}
-                  </div>
-                );
-              }}
-              parentRef={this.state.parentRef}
-            />
-          </div>
         </div>
       </div>
     );
