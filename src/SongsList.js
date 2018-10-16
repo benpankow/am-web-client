@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MusicKit from "./musickitService";
 import { fetchSongList, getCachedSongList } from "./mediaFetcher";
 import { playMedia, formatTimeMs, playParams } from "./playerUtils";
+import { getLSValueWithDefault, setLSValue } from "./localStorage";
 import ResizableTable from "./components/ResizableTable";
 
 type Props = {
@@ -14,6 +15,9 @@ type Props = {
 type State = {
   songs: []
 };
+
+const SL_COLS_SIZE_KEY = "songsListColSizes";
+const SL_SORT_KEY = "songsListSort";
 
 // List of all a user's songs
 class SongsList extends Component<Props, State> {
@@ -89,16 +93,29 @@ class SongsList extends Component<Props, State> {
       };
     });
 
+    const sizes = getLSValueWithDefault(SL_COLS_SIZE_KEY, [45, 5, 20, 30]);
+    const sort = getLSValueWithDefault(SL_SORT_KEY, {
+      column: 0,
+      inverted: false
+    });
+
     return (
       <div className="songs_container">
         <ResizableTable
           onClicked={row => {
             playParams(row.playParams);
           }}
-          initialColumnSizes={[45, 5, 20, 30]}
+          initialColumnSizes={sizes}
+          initialSort={sort}
           columns={["name", "time", "artist", "album"]}
           columnNames={["Name", "Time", "Artist", "Album"]}
           rows={rows}
+          onColumnSizeChange={values => {
+            setLSValue(SL_COLS_SIZE_KEY, values);
+          }}
+          onSortChange={value => {
+            setLSValue(SL_SORT_KEY, value);
+          }}
         />
       </div>
     );

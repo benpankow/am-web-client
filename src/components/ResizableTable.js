@@ -10,7 +10,10 @@ type Props = {
   columnNames: [], // List of column display names corresponding to labels
   initialColumnSizes: [], // Initial percentage sizes of each column
   onClicked: {}, // Method to call when a row is clicked
-  rows: [] // Rows
+  rows: [], // Rows
+  initialSort: {},
+  onColumnSizeChange: {},
+  onSortChange: {}
 };
 
 type State = {
@@ -42,8 +45,14 @@ class ResizableTable extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const { initialColumnSizes } = this.props;
+    const { initialColumnSizes, initialSort } = this.props;
     this.setState({ columnSizes: initialColumnSizes });
+    if (initialSort) {
+      this.setState({
+        sortColumn: initialSort["column"],
+        sortInverted: initialSort["inverted"]
+      });
+    }
   }
 
   // Start resizing this column - bind mouse move/mouseup events
@@ -62,6 +71,7 @@ class ResizableTable extends Component<Props, State> {
   resizeDone = (idx, e) => {
     document.body.onmousemove = null;
     document.body.onmouseup = null;
+    this.props.onColumnSizeChange(this.state.columnSizes);
   };
 
   // Recalculate column widths when mouse moves during resize
@@ -121,17 +131,18 @@ class ResizableTable extends Component<Props, State> {
   // Given a column index, update the sorting column/direction
   // If this column is already the current sorting column, invert direction
   updateSort = idx => {
-    const { sortColumn, sortInverted } = this.state;
+    let { sortColumn, sortInverted } = this.state;
     if (sortColumn == idx) {
-      this.setState({
-        sortInverted: !sortInverted
-      });
+      sortInverted = !sortInverted;
     } else {
-      this.setState({
-        sortColumn: idx,
-        sortInverted: false
-      });
+      sortColumn = idx;
+      sortInverted = false;
     }
+    this.props.onSortChange({ column: sortColumn, inverted: sortInverted });
+    this.setState({
+      sortColumn: sortColumn,
+      sortInverted: sortInverted
+    });
   };
 
   render() {

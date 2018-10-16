@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MusicKit from "./musickitService";
+import { getLSValueWithDefault, setLSValue } from "./localStorage";
 import AlbumList from "./AlbumList";
 import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
@@ -25,10 +26,10 @@ class App extends Component<State> {
     authorized: false,
     currentSong: null,
     page: "albums",
-    settings: {
+    settings: getLSValueWithDefault("settings", {
       coloredBackground: true,
       darkTheme: false
-    },
+    }),
     displayFilter: "",
     filter: ""
   };
@@ -62,8 +63,6 @@ class App extends Component<State> {
       console.log(event.item);
       app.setState({ currentSong: event.item });
     });
-
-    this.loadLocalStorage();
   }
 
   setPage = page => {
@@ -82,20 +81,11 @@ class App extends Component<State> {
     }, 300);
   };
 
-  loadLocalStorage = () => {
-    const settings = localStorage.getItem("settings");
-    if (settings) {
-      this.setState({ settings: JSON.parse(settings) });
-    } else {
-      localStorage.setItem("settings", JSON.stringify(this.state.settings));
-    }
-  };
-
   adjustSetting = (name, value) => {
     let { settings } = this.state;
     settings[name] = value;
     this.setState({ settings: settings });
-    localStorage.setItem("settings", JSON.stringify(settings));
+    setLSValue("settings", settings);
   };
 
   renderPage = () => {
