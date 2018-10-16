@@ -211,6 +211,23 @@ body {
   font-size: 24px;
 }
 
+.play_album_detail {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+  width: 28px;
+  height: 28px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.play_album_detail .material-icons {
+  font-size: 32px;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+}
+
 .album_artist_detail {
   font-size: 16px;
   margin-top: 4px;

@@ -81,7 +81,17 @@ class AlbumSongs extends Component<Props, State> {
             }}
           />
           <div className={"song_list_l padding10"}>
-            <div className="album_title_detail">{album.attributes.name}</div>
+            <div className="album_title_detail">
+              {album.attributes.name}
+              <div
+                className="play_album_detail"
+                onMouseDown={() => {
+                  playCollection(songs);
+                }}
+              >
+                <i className="material-icons">play_arrow</i>
+              </div>
+            </div>
             <div className="album_artist_detail">
               {album.attributes.artistName}
             </div>
