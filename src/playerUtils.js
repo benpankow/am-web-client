@@ -1,5 +1,10 @@
 import MusicKit from "./musickitService";
 
+export function shuffleCollection(items) {
+  const shuffled = items.slice().sort(() => Math.random() - 0.5);
+  playCollection(shuffled);
+}
+
 // Plays a given collection of itmes (songs, etc)
 export function playCollection(items) {
   const music = MusicKit.getInstance();

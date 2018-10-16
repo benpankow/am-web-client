@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { playMedia, formatTimeMs, playCollection } from "./playerUtils";
+import {
+  playMedia,
+  formatTimeMs,
+  playCollection,
+  shuffleCollection
+} from "./playerUtils";
 import { getAlbum } from "./mediaFetcher";
 
 type Props = {
@@ -90,6 +95,14 @@ class AlbumSongs extends Component<Props, State> {
                 }}
               >
                 <i className="material-icons">play_arrow</i>
+              </div>
+              <div
+                className="shuffle_album_detail"
+                onMouseDown={() => {
+                  shuffleCollection(songs);
+                }}
+              >
+                <i className="material-icons">shuffle</i>
               </div>
             </div>
             <div className="album_artist_detail">
