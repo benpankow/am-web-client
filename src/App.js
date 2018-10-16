@@ -62,6 +62,8 @@ class App extends Component<State> {
       console.log(event.item);
       app.setState({ currentSong: event.item });
     });
+
+    this.loadLocalStorage();
   }
 
   setPage = page => {
@@ -80,10 +82,20 @@ class App extends Component<State> {
     }, 300);
   };
 
+  loadLocalStorage = () => {
+    const settings = localStorage.getItem("settings");
+    if (settings) {
+      this.setState({ settings: JSON.parse(settings) });
+    } else {
+      localStorage.setItem("settings", JSON.stringify(this.state.settings));
+    }
+  };
+
   adjustSetting = (name, value) => {
     let { settings } = this.state;
     settings[name] = value;
     this.setState({ settings: settings });
+    localStorage.setItem("settings", JSON.stringify(settings));
   };
 
   renderPage = () => {
