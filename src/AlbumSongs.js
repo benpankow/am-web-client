@@ -67,6 +67,65 @@ class AlbumSongs extends Component<Props, State> {
     }
   };
 
+  renderDummySongs = () => {
+    const { height, songs, selectedSong } = this.state;
+    const { album, url, currentSong, settings } = this.props;
+
+    const dummySongs = [];
+    for (let idx = 0; idx < album.attributes.trackCount; idx++) {
+      const duration = 0;
+
+      // Display track number, unless song is playing, then show
+      // speaker icon
+      const trackNumber = idx + 1;
+
+      const className = "song noselect";
+
+      dummySongs.push(
+        <div key={"dummySong" + idx} className={className}>
+          <span className="song_number">{trackNumber}</span>
+          Loading...
+          <span className="song_length">{formatTimeMs(duration)}</span>
+        </div>
+      );
+    }
+
+    return dummySongs;
+  };
+
+  renderSong = (song, idx) => {
+    const { height, songs, selectedSong } = this.state;
+    const { album, url, currentSong, settings } = this.props;
+
+    const duration = song.attributes.durationInMillis;
+
+    // Display track number, unless song is playing, then show
+    // speaker icon
+    const trackNumber =
+      currentSong && song.id == currentSong._container.id ? (
+        <i className="material-icons">volume_up</i>
+      ) : (
+        song.attributes.trackNumber
+      );
+
+    const className =
+      idx == selectedSong ? "song selected noselect" : "song noselect";
+
+    return (
+      <div
+        key={song.id}
+        className={className}
+        onMouseDown={() => {
+          this.clickSong(idx);
+        }}
+      >
+        <span className="song_number">{trackNumber}</span>
+        {song.attributes.name}
+        <span className="song_length">{formatTimeMs(duration)}</span>
+      </div>
+    );
+  };
+
   render() {
     const { height, songs, selectedSong } = this.state;
     const { album, url, currentSong, settings } = this.props;
@@ -110,39 +169,9 @@ class AlbumSongs extends Component<Props, State> {
             </div>
             <div className="divider" />
             <div className="song_container">
-              {songs.map((song, idx) => {
-                const duration = song.attributes.durationInMillis;
-
-                // Display track number, unless song is playing, then show
-                // speaker icon
-                const trackNumber =
-                  currentSong && song.id == currentSong._container.id ? (
-                    <i className="material-icons">volume_up</i>
-                  ) : (
-                    song.attributes.trackNumber
-                  );
-
-                const className =
-                  idx == selectedSong
-                    ? "song selected noselect"
-                    : "song noselect";
-
-                return (
-                  <div
-                    key={song.id}
-                    className={className}
-                    onMouseDown={() => {
-                      this.clickSong(idx);
-                    }}
-                  >
-                    <span className="song_number">{trackNumber}</span>
-                    {song.attributes.name}
-                    <span className="song_length">
-                      {formatTimeMs(duration)}
-                    </span>
-                  </div>
-                );
-              })}
+              {songs.length == 0
+                ? this.renderDummySongs()
+                : songs.map(this.renderSong)}
             </div>
           </div>
           <div className="song_list_r">
