@@ -2,9 +2,9 @@
   "name": "apple-2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/main.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start": "electron .",
     "build": "NODE_ENV=production webpack -p --config ./webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^1.0.0",
+    "electron": "^3.0.4",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-react": "^7.11.1",
     "react-hot-loader": "^4.3.6",
