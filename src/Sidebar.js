@@ -92,6 +92,15 @@ class Sidebar extends Component<Props, State> {
           <div className="sidebar_category">Settings</div>
           <SidebarEntry
             onClick={() => {
+              setPage("fullscreen");
+            }}
+            iconName="settings"
+            text="Fullscreen"
+            page="fullscreen"
+            currentPage={page}
+          />
+          <SidebarEntry
+            onClick={() => {
               setPage("settings");
             }}
             iconName="settings"

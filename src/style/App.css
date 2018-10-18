@@ -919,3 +919,46 @@ td {
   color: white;
   background-color: #2987f0;
 }
+
+.fullscreen_container {
+  text-align: center;
+  flex: 1;
+  font-size: 24px;
+}
+
+.fullscreen_container_inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 500px;
+  perspective: 1000px;
+}
+
+.fullscreen_album_art {
+  transition: left 1s, width 1s, height 1s, top 1s, z-index 1s, opacity 0.5s,
+    transform 1s;
+  transition-delay: 0.25s;
+}
+
+.fullscreen_album_art.left.decreasing {
+  transition-delay: 0s;
+}
+
+.fullscreen_album_art.left {
+  transform: rotateY(-45deg);
+}
+
+.fullscreen_album_art.right {
+  transform: rotateY(45deg);
+  transition-delay: 0s;
+}
+
+.fullscreen_album_art.right.decreasing {
+  transition-delay: 0.25s;
+}
+
+.fullscreen_album_art.hidden {
+  opacity: 0;
+}

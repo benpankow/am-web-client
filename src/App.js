@@ -5,6 +5,7 @@ import AlbumList from "./AlbumList";
 import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
+import Fullscreen from "./Fullscreen";
 import Sidebar from "./Sidebar";
 import "./style/App.css";
 import { DEVELOPER_TOKEN } from "./secrets";
@@ -112,6 +113,8 @@ class App extends Component<State> {
       return (
         <Settings settings={settings} adjustSetting={this.adjustSetting} />
       );
+    } else if (page == "fullscreen") {
+      return <Fullscreen settings={settings} music={MusicKit.getInstance()} />;
     } else {
       return "";
     }
