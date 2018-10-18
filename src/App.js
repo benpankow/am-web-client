@@ -6,7 +6,7 @@ import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
 import Sidebar from "./Sidebar";
-import "./style/App.scss";
+import "./style/main.scss";
 import { DEVELOPER_TOKEN } from "./secrets";
 
 type State = {
