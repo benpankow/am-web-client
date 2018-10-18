@@ -1,3 +1,5 @@
+@import "./_theme.scss";
+
 html,
 body {
   margin: 0;
@@ -8,6 +10,20 @@ body {
   background-color: #ffffff;
   overflow-y: hidden;
   overflow-x: hidden;
+}
+
+#app,
+.App,
+.fullheight {
+  height: 100%;
+}
+
+.app_inner {
+  height: 100%;
+  @include theme() {
+    background-color: themed("background");
+    color: themed("text_full");
+  }
 }
 
 .container {
@@ -88,12 +104,12 @@ body {
   z-index: 2;
   /*transition: height .25s;*/
   overflow: hidden;
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
 }
 
 .song_list.no_blur {
-  background-color: #dddddd;
+  @include theme() {
+    background-color: themed("song_list/no_blur");
+  }
 }
 
 .song_list.hidden {
@@ -132,7 +148,9 @@ body {
   right: 0;
   top: 0;
   height: 16px;
-  background-color: white;
+  @include theme() {
+    background-color: themed("background");
+  }
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -166,7 +184,9 @@ body {
   position: absolute;
   height: 30px;
   width: 30px;
-  background-color: white;
+  @include theme() {
+    background-color: themed("background");
+  }
   bottom: 16px;
   border-radius: 10px;
   transform: rotate(45deg);
@@ -245,7 +265,9 @@ body {
   margin-right: 10px;
   width: 18px;
   text-align: right;
-  color: #333333;
+  @include theme() {
+    color: themed("text_light1");
+  }
   position: relative;
 }
 
@@ -258,7 +280,9 @@ body {
 
 .divider {
   width: 100%;
-  border-top: 1px solid #333333;
+  @include theme() {
+    border-top: 1px solid themed("text_light1");
+  }
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -277,8 +301,14 @@ body {
 
 .song.selected::before {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.125);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  @include theme() {
+    background-color: rgba(themed("text_full"), 0.125);
+    border: 1px solid rgba(themed("text_full"), 0.2);
+  }
+  /*.dark_theme .song.selected::before {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }*/
   left: -10px;
   top: -1px;
   bottom: -1px;
@@ -291,14 +321,18 @@ body {
 
 .song_length {
   float: right;
-  color: #333333;
+  @include theme() {
+    color: themed("text_light1");
+  }
 }
 
 .blur {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
+  @include theme() {
+    opacity: themed("blur_opacity");
+  }
   filter: blur(50px);
   transform: scale(1.3);
   z-index: -1;
@@ -317,9 +351,10 @@ body {
   width: 100%;
   width: 100%;
   position: fixed;
-  background-color: #dddddd;
-  background-image: linear-gradient(to bottom, #eeeeee, #cccccc);
-  border-bottom: 1px solid #aaaaaa;
+  @include theme() {
+    background: themed("media_bar");
+    border-bottom: 1px solid themed("border");
+  }
   z-index: 10;
   text-align: center;
 }
@@ -352,7 +387,9 @@ body {
   left: 0;
   bottom: 0;
   height: 4px;
-  background-color: #2987f0;
+  @include theme() {
+    background-color: themed("highlight");
+  }
 }
 
 .progress::after {
@@ -361,7 +398,9 @@ body {
   position: absolute;
   right: 0;
   top: -4px;
-  background-color: #2987f0;
+  @include theme() {
+    background-color: themed("highlight");
+  }
   height: 5px;
   width: 3px;
   border-radius: 3px;
@@ -373,7 +412,9 @@ body {
   bottom: 0;
   right: 0;
   height: 4px;
-  background-color: #888888;
+  @include theme() {
+    background-color: themed("media_bar/progress_outer");
+  }
 }
 
 .current_song_title {
@@ -388,7 +429,9 @@ body {
 .current_song_info {
   margin-top: 2px;
   font-size: 12px;
-  color: #555555;
+  @include theme() {
+    color: themed("text_light2");
+  }
 }
 
 .current_song_time {
@@ -396,7 +439,9 @@ body {
   left: 8px;
   bottom: 9px;
   font-size: 12px;
-  color: #555555;
+  @include theme() {
+    color: themed("text_light2");
+  }
 }
 
 .current_song_time_left {
@@ -404,7 +449,9 @@ body {
   right: 8px;
   bottom: 9px;
   font-size: 12px;
-  color: #555555;
+  @include theme() {
+    color: themed("text_light2");
+  }
 }
 
 .playing_details_wrap {
@@ -419,11 +466,15 @@ body {
   position: absolute;
   height: 100%;
   text-align: left;
-  background-color: #eeeeee;
-  border-left: 1px solid #bbbbbb;
-  border-right: 1px solid #bbbbbb;
+
   left: 350px;
   right: 350px;
+
+  @include theme() {
+    border-left: 1px solid themed("border");
+    border-right: 1px solid themed("border");
+    background-color: themed("media_bar/playing_details");
+  }
 }
 
 .controls {
@@ -535,14 +586,17 @@ body {
 .volume {
   width: 120px;
   height: 38px;
+  display: inline-block;
   margin-left: 45px;
 }
 
 .sidebar {
   margin-top: 50px;
   position: relative;
-  background-color: #ffffff;
-  border-right: 1px solid #aaaaaa;
+  @include theme() {
+    border-right: 1px solid themed("border");
+    background-color: themed("sidebar");
+  }
   flex: 0 0 249px;
   padding: 8px 10px;
   overflow: hidden;
@@ -566,12 +620,6 @@ body {
   user-select: none;
 }
 
-#app,
-.App,
-.fullheight {
-  height: 100%;
-}
-
 .main_cols {
   width: 100%;
   height: 100%;
@@ -579,14 +627,18 @@ body {
 }
 
 .sidebar_category {
-  color: #666666;
+  @include theme() {
+    color: themed("text_light3");
+  }
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 3px;
 }
 
 .sidebar_entry {
-  color: #333333;
+  @include theme() {
+    color: themed("text_light1");
+  }
   height: 28px;
   line-height: 28px;
   padding-left: 42px;
@@ -604,16 +656,24 @@ body {
   left: 18px;
   top: 5px;
   font-size: 18px;
-  color: #666666;
+  @include theme() {
+    color: themed("text_light3");
+  }
 }
 
 .sidebar_entry.selected {
-  color: white;
-  background-color: #2987f0;
+  @include theme() {
+    color: themed("text_full_highlight");
+  }
+  @include theme() {
+    background-color: themed("highlight");
+  }
 }
 
 .sidebar_entry.selected .material-icons {
-  color: white;
+  @include theme() {
+    color: themed("text_full_highlight");
+  }
 }
 
 .sidebar_entry.disabled {
@@ -652,7 +712,9 @@ body {
 
 .button {
   padding: 5px 10px;
-  background-color: #2987f0;
+  @include theme() {
+    background-color: themed("highlight");
+  }
   display: inline-block;
   border-radius: 10px;
   color: white;
@@ -667,7 +729,6 @@ body {
 .settings_container {
   flex: 1;
   margin-top: 50px;
-  color: #000000;
 }
 
 .settings_inner {
@@ -683,124 +744,6 @@ body {
   margin-bottom: 10px;
 }
 
-.dark_theme .media_bar {
-  background-image: none;
-  background-color: #3f3f3f;
-  border-bottom: 1px solid #111111;
-}
-
-.dark_theme .sidebar_entry {
-  color: #cccccc;
-}
-
-.dark_theme .sidebar_entry .material-icons {
-  color: #999999;
-}
-
-.dark_theme .sidebar_category {
-  color: #999999;
-}
-
-.dark_theme .sidebar {
-  background-color: #333333;
-  border-right: 1px solid #111111;
-}
-
-.dark_theme .media_button,
-.dark_theme .media_button_small {
-  color: #ffffff;
-}
-
-.dark_theme .playing_details {
-  background-color: #252525;
-  border-left: 1px solid #111111;
-  border-right: 1px solid #111111;
-}
-
-.dark_theme .current_song_info {
-  color: #aaaaaa;
-}
-
-.dark_theme .current_song_time {
-  color: #aaaaaa;
-}
-
-.dark_theme .current_song_time_left {
-  color: #aaaaaa;
-}
-
-.dark_theme .current_song_title {
-  color: #ffffff;
-}
-
-.dark_theme .blur {
-  opacity: 0.5;
-}
-
-.dark_theme .song {
-  color: #ffffff;
-}
-
-.dark_theme .song.selected::before {
-  background-color: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.dark_theme .song_length {
-  color: #cccccc;
-}
-
-.dark_theme .album_title_detail {
-  color: #ffffff;
-}
-
-.dark_theme .album_artist_detail {
-  color: #ffffff;
-}
-
-.dark_theme .song_number {
-  color: #cccccc;
-}
-
-.dark_theme .divider {
-  border-top: 1px solid #cccccc;
-}
-
-.dark_theme .trapezoid::after,
-.dark_theme .trapezoid_r::after {
-  background-color: #222222;
-}
-
-.dark_theme .left_bar::after,
-.dark_theme .right_bar::after {
-  background-color: #222222;
-}
-
-.dark_theme .song_list {
-  border-top: 1px solid #111111;
-  border-bottom: 1px solid #111111;
-}
-
-.dark_theme .album_title {
-  color: #ffffff;
-}
-
-.dark_theme.App {
-  background-color: #222222;
-}
-
-.dark_theme .progress_outer {
-  background-color: #353535;
-}
-
-.dark_theme .song_list.no_blur {
-  background-color: #151515;
-}
-
-.dark_theme .settings_container {
-  color: #ffffff;
-}
-
 table,
 tr,
 th,
@@ -813,11 +756,13 @@ td {
 
 .header {
   position: absolute;
-  background-color: #ffffff;
   height: 28px;
   left: 0px;
   top: 0px;
   right: 17px;
+  @include theme() {
+    background-color: themed("background");
+  }
 }
 
 .song_table_container,
@@ -845,8 +790,10 @@ td {
 
 .songs_container th {
   padding: 2px 4px 2px 3px;
-  border-bottom: 2px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  @include theme() {
+    border-bottom: 2px solid themed("border_light");
+    border-right: 1px solid themed("border_light");
+  }
   font-weight: normal;
   text-align: left;
   vertical-align: bottom;
@@ -880,7 +827,9 @@ td {
 }
 
 .songs_container tr.highlight {
-  background-color: #eeeeee;
+  @include theme() {
+    background-color: themed("row_highlight");
+  }
 }
 
 .virtual_list_outer {
@@ -897,27 +846,11 @@ td {
   position: absolute;
 }
 
-.dark_theme .songs_container {
-  color: #ffffff;
-}
-
-.dark_theme .songs_container tr.highlight {
-  background-color: #2a2a2a;
-}
-
-.dark_theme .header {
-  background-color: #222222;
-}
-
-.dark_theme .songs_container th {
-  border-bottom: 2px solid #444444;
-  border-right: 1px solid #444444;
-}
-
-.dark_theme .songs_container tr.selected,
 .songs_container tr.selected {
   color: white;
-  background-color: #2987f0;
+  @include theme() {
+    background-color: themed("highlight");
+  }
 }
 
 .fullscreen_container {

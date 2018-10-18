@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MusicKit from "./musickitService";
-import "./style/slider.css";
+import Slider from "./components/Slider";
 import {
   formatTime,
   playPause,
@@ -80,14 +80,14 @@ class MediaBar extends Component<Props, State> {
           <div className="media_button_small" onClick={nextItem}>
             <i className={"material-icons"}>fast_forward</i>
           </div>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            className="volume"
-            value={getVolume() * 100}
-            onChange={this.volumeSliderChange}
-          />
+          <div className="volume">
+            <Slider
+              min={0}
+              max={100}
+              progress={getVolume() * 100}
+              onChange={this.volumeSliderChange}
+            />
+          </div>
         </div>
         <div className="playing_details_wrap">
           <div className="playing_details">

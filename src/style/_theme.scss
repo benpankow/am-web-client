@@ -1,0 +1,66 @@
+$themes: (
+  "light": (
+    "highlight": #2987f0,
+    "media_bar": linear-gradient(to bottom, #eeeeee, #cccccc),
+    "media_bar/playing_details": #eeeeee,
+    "media_bar/progress_outer": #888888,
+    "border": #aaaaaa,
+    "border_light": #dddddd,
+    "sidebar": #ffffff,
+    "background": #ffffff,
+    "row_highlight": #eeeeee,
+    "song_list/no_blur": #dddddd,
+    "slider/main": linear-gradient(to bottom, #888888, #aaaaaa),
+    "slider/progress": #666666,
+    "text_full_highlight": #ffffff,
+    "text_full": #000000,
+    "text_light1": #333333,
+    "text_light2": #555555,
+    "text_light3": #666666,
+    "blur_opacity": 0.7
+  ),
+  "dark": (
+    "highlight": #2987f0,
+    "media_bar": #3f3f3f,
+    "media_bar/playing_details": #252525,
+    "media_bar/progress_outer": #353535,
+    "border": #111111,
+    "border_light": #444444,
+    "sidebar": #333333,
+    "background": #222222,
+    "row_highlight": #2a2a2a,
+    "song_list/no_blur": #151515,
+    "slider/main": linear-gradient(to bottom, #222222, #111111),
+    "slider/progress": #aaaaaa,
+    "text_full_highlight": #ffffff,
+    "text_full": #ffffff,
+    "text_light1": #cccccc,
+    "text_light2": #aaaaaa,
+    "text_light3": #999999,
+    "blur_opacity": 0.5
+  )
+);
+
+$highlight: blue;
+
+$_current_theme: null;
+@mixin theme() {
+  @each $theme in map-keys($themes) {
+    $_current_theme: $theme !global;
+    .#{$theme}_theme & {
+      @content;
+    }
+  }
+  $_current_theme: null !global;
+}
+
+@function themed($color) {
+  @if ($_current_theme == null) {
+    @error "color function used in area not wrapped by themed mixin";
+  }
+  @if (not map-has-key(map-get($themes, $_current_theme), $color)) {
+    @error "color function passed invalid color name";
+  }
+  $map: map-get($themes, $_current_theme);
+  @return map-get($map, $color);
+}
