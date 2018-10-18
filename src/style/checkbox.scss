@@ -1,3 +1,5 @@
+@import "./_theme.scss";
+
 input[type="checkbox"] {
   cursor: pointer;
   border: none;
@@ -49,12 +51,16 @@ input[type="checkbox"] {
 }
 
 .checkbox.checked::after {
-  background-color: #2987f0;
-  border-color: #2987f0;
+  @include theme() {
+    background-color: themed("highlight");
+    border: themed("highlight");
+  }
 }
 
 .checkbox .material-icons {
-  color: white;
+  @include theme() {
+    color: themed("text_full_highlight");
+  }
   z-index: 2;
   position: absolute;
   top: 2px;

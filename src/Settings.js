@@ -3,7 +3,6 @@ import Checkbox from "./components/Checkbox";
 import VirtualList from "./components/VirtualList";
 
 import MusicKit from "./musickitService";
-import "./style/checkbox.css";
 
 type Props = {
   settings: {},

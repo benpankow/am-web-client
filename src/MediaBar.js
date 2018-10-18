@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MusicKit from "./musickitService";
-import "./style/slider.css";
+import "./style/slider.scss";
 import {
   formatTime,
   playPause,

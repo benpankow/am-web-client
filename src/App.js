@@ -6,7 +6,7 @@ import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
 import Sidebar from "./Sidebar";
-import "./style/App.css";
+import "./style/App.scss";
 import { DEVELOPER_TOKEN } from "./secrets";
 
 type State = {
@@ -27,7 +27,7 @@ class App extends Component<State> {
     currentSong: null,
     page: "albums",
     settings: getLSValueWithDefault("settings", {
-      coloredBackground: true,
+      coloredBackground: false,
       darkTheme: false
     }),
     displayFilter: "",
@@ -126,33 +126,39 @@ class App extends Component<State> {
       displayFilter
     } = this.state;
     return (
-      <div className={"App" + (settings.darkTheme ? " dark_theme" : "")}>
-        <div className={"fullheight noselect"}>
-          {authorized ? (
-            <MediaBar
-              music={MusicKit.getInstance()}
-              displayFilter={displayFilter}
-              setFilter={this.setFilter}
-            />
-          ) : (
-            ""
-          )}
-          <div className="main_cols">
-            <Sidebar page={page} setPage={this.setPage} />{" "}
+      <div
+        className={
+          "App" + (settings.darkTheme ? " dark_theme" : " light_theme")
+        }
+      >
+        <div className="app_inner">
+          <div className={"fullheight noselect"}>
             {authorized ? (
-              this.renderPage()
+              <MediaBar
+                music={MusicKit.getInstance()}
+                displayFilter={displayFilter}
+                setFilter={this.setFilter}
+              />
             ) : (
-              <div className="sign_in_container">
-                <div className="sign_in_container_inner">
-                  <div className="sign_in_text">
-                    Sign in to access your music.
-                  </div>
-                  <div className="button" onClick={this.authorize}>
-                    Sign In
+              ""
+            )}
+            <div className="main_cols">
+              <Sidebar page={page} setPage={this.setPage} />{" "}
+              {authorized ? (
+                this.renderPage()
+              ) : (
+                <div className="sign_in_container">
+                  <div className="sign_in_container_inner">
+                    <div className="sign_in_text">
+                      Sign in to access your music.
+                    </div>
+                    <div className="button" onClick={this.authorize}>
+                      Sign In
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
