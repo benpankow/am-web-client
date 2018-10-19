@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MusicKit from "./musickitService";
 import Slider from "./components/Slider";
+import ProgressBar from "./components/ProgressBar";
+
 import {
   formatTime,
   playPause,
@@ -102,13 +104,8 @@ class MediaBar extends Component<Props, State> {
               <div className="current_song_time_left">
                 -{formatTime(timeRemaining)}
               </div>
-              <div className="progress_outer">
-                <div
-                  className="progress"
-                  style={{
-                    width: pct + "%"
-                  }}
-                />
+              <div class="media_bar_progress">
+                <ProgressBar progress={pct} />
               </div>
             </div>
           </div>

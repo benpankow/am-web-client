@@ -56,7 +56,7 @@ class Fullscreen extends Component<Props, State> {
     const url = song.attributes.artwork.url;
     const urlFormatted = url.replace("{w}", 500).replace("{h}", 500);
 
-    const size = i == 0 ? 500 : 400 - Math.abs(i) * 25;
+    const size = i == 0 ? 500 : 400 - Math.pow(Math.abs(i), 1) * 25;
     const top = i == 0 ? 0 : (500 - size) / 2;
     const position =
       -(size / 2) +
@@ -67,6 +67,22 @@ class Fullscreen extends Component<Props, State> {
     const zindex = 10 - Math.abs(i);
     const hidden = Math.abs(i) == buffer;
 
+    const zpos =
+      i == 0 ? 0 : -Math.abs(i) * 150 + Math.abs(Math.sign(i)) * -100;
+    const xpos = -(500 / 2) + i * 125 + 500 + Math.sign(i) * 200;
+
+    const transform =
+      "translate3d(" +
+      String(xpos) +
+      "px," +
+      String(0) +
+      "px," +
+      String(zpos) +
+      "px) rotateY(" +
+      String(-45 * Math.sign(i)) +
+      "deg)";
+    console.log(transform);
+
     let side = "";
     if (Math.sign(i) == 1) {
       side = " left";
@@ -75,7 +91,7 @@ class Fullscreen extends Component<Props, State> {
     }
 
     return (
-      <img
+      <div
         className={
           "fullscreen_album_art" +
           (hidden ? " hidden" : "") +
@@ -83,17 +99,17 @@ class Fullscreen extends Component<Props, State> {
           (lastQueuePos > queue._position ? " decreasing" : "")
         }
         key={key}
-        src={urlFormatted}
         style={{
-          width: size,
-          height: size,
-          position: "absolute",
+          transform: transform,
+          width: 500,
+          height: 500 /*,
           left: position,
           top: top,
-          zIndex: zindex,
-          boxShadow: "2px 2px 10px 0px rgba(0, 0, 0, 0.5)"
+          zIndex: zindex*/
         }}
-      />
+      >
+        <img src={urlFormatted} />
+      </div>
     );
   };
 
@@ -107,7 +123,7 @@ class Fullscreen extends Component<Props, State> {
 
     const albumsToDisplay = [];
 
-    const buffer = 5;
+    const buffer = 4;
     const baseIdx = queue._position - buffer;
     for (let i = 0; i < buffer * 2 + 1; i++) {
       let value = "";
@@ -119,12 +135,15 @@ class Fullscreen extends Component<Props, State> {
     }
 
     const currentSong = queue._items[queue._position];
-    console.log(currentSong);
+    const title = currentSong.attributes.name;
+    const artist = currentSong.attributes.artistName;
 
     return (
       <div className="fullscreen_container">
         <div className="fullscreen_container_inner">
-          <div>{albumsToDisplay}</div>
+          {albumsToDisplay}
+          <div className="fullscreen_song_title">{title}</div>
+          <div className="fullscreen_song_artist">{artist}</div>
         </div>
       </div>
     );

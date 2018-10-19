@@ -386,7 +386,7 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 4px;
+  height: 100%;
   @include theme() {
     background-color: themed("highlight");
   }
@@ -406,12 +406,18 @@ body {
   border-radius: 3px;
 }
 
-.progress_outer {
+.media_bar_progress {
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
   height: 4px;
+}
+
+.progress_outer {
+  width: 100%;
+  height: 100%;
+  position: relative;
   @include theme() {
     background-color: themed("media_bar/progress_outer");
   }
@@ -865,26 +871,46 @@ td {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1000px;
-  height: 500px;
+  height: 600px;
   perspective: 1000px;
+  transform-style: preserve-3d;
+  text-align: center;
+}
+
+.fullscreen_song_title {
+  font-size: 22px;
+  padding: 0px 5px;
+  margin-top: 515px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fullscreen_song_artist {
+  margin-top: 5px;
+  font-size: 16px;
+  @include theme() {
+    color: themed("text_light2");
+  }
 }
 
 .fullscreen_album_art {
-  transition: left 1s, width 1s, height 1s, top 1s, z-index 1s, opacity 0.5s,
-    transform 1s;
+  transition: opacity 0.5s, transform 1s;
   transition-delay: 0.25s;
+  position: absolute;
+}
+
+.fullscreen_album_art img {
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
 }
 
 .fullscreen_album_art.left.decreasing {
   transition-delay: 0s;
 }
 
-.fullscreen_album_art.left {
-  transform: rotateY(-45deg);
-}
-
 .fullscreen_album_art.right {
-  transform: rotateY(45deg);
   transition-delay: 0s;
 }
 
