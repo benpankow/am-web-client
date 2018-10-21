@@ -1,21 +1,43 @@
 import React, { Component } from "react";
 import SidebarEntry from "./SidebarEntry";
+import { fetchPlaylistList, getCachedPlaylistList } from "./mediaFetcher";
 
 const MAX_SIDEBAR_SIZE = 500;
 
 type Props = {
   setPage: {},
-  page: string
+  page: string,
+  music: {}
 };
 
 type State = {
+  playlists: [],
   width: ?number
 };
 
 // Sidebar with access to library, settings, sign out etc
 class Sidebar extends Component<Props, State> {
   state = {
+    playlists: [],
     width: 160
+  };
+
+  componentDidMount() {
+    this.fetchPlaylists();
+  }
+
+  fetchPlaylists = () => {
+    const { music } = this.props;
+    const self = this;
+
+    self.setState({ playlists: getCachedPlaylistList() });
+
+    fetchPlaylistList(
+      currentList => {
+        self.setState({ playlists: currentList });
+      },
+      () => {}
+    );
   };
 
   // Resizes sidebar while dragging
@@ -40,8 +62,30 @@ class Sidebar extends Component<Props, State> {
     location.reload();
   };
 
+  renderPlaylists = () => {
+    const { setPage, page } = this.props;
+    const { playlists } = this.state;
+
+    return playlists.map((playlist, i) => {
+      const name = playlist.attributes.name;
+      const playlistPage = "playlist_" + String(playlist.id);
+      return (
+        <SidebarEntry
+          onClick={() => {
+            setPage(playlistPage);
+          }}
+          iconName="queue_music"
+          text={name}
+          page={playlistPage}
+          currentPage={page}
+        />
+      );
+    });
+  };
+
   render() {
     const { setPage, page } = this.props;
+
     return (
       <div
         className="sidebar"
@@ -87,6 +131,8 @@ class Sidebar extends Component<Props, State> {
             page="genres"
             currentPage={page}
           />
+          <div className="sidebar_category">Playlists</div>
+          {this.renderPlaylists()}
         </div>
         <div className={"sidebar_entries bottom"}>
           <div className="sidebar_category">Settings</div>

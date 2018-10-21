@@ -1,8 +1,10 @@
 import MusicKit from "./musickitService";
 
 let songsCache = {};
+let playlistsCache = {};
 let albumList = [];
 let songList = [];
+let playlistList = [];
 
 // Load and cache a set of albums
 export function cacheAlbums(albumIds) {
@@ -17,6 +19,25 @@ export function cacheAlbum(albumId) {
     return Promise.resolve(0);
   } else {
     return getAlbum(albumId);
+  }
+}
+
+export function getPlaylist(playlistId) {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+
+  if (playlistId in playlistsCache) {
+    return Promise.resolve(playlistsCache[playlistId]);
+  } else {
+    const promise = music.api.library.playlist(playlistId);
+    promise
+      .then(result => {
+        playlistsCache[playlistId] = result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    return promise;
   }
 }
 
@@ -38,6 +59,49 @@ export function getAlbum(albumId) {
       });
     return promise;
   }
+}
+
+export function getCachedPlaylistList() {
+  return playlistList;
+}
+
+// Gets all of a user's playlists
+export function fetchPlaylistList(partialCallback, doneCallback) {
+  _getPlaylistListInner(partialCallback, doneCallback, 0, []);
+}
+
+// Fetches groups of 100 playlists, calling partialCallback as each group returns
+function _getPlaylistListInner(
+  partialCallback,
+  doneCallback,
+  offset,
+  currentList
+) {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+
+  music.api.library
+    .playlists(null, {
+      offset: offset,
+      limit: 100
+    })
+    .then(function(cloudPlaylists) {
+      const appendedList = currentList.concat(cloudPlaylists);
+
+      partialCallback(appendedList);
+
+      if (cloudPlaylists.length == 100) {
+        _getPlaylistListInner(
+          partialCallback,
+          doneCallback,
+          offset + 100,
+          appendedList
+        );
+      } else {
+        doneCallback(appendedList);
+        playlistList = appendedList;
+      }
+    });
 }
 
 export function getCachedAlbumList() {

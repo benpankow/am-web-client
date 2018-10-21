@@ -1,7 +1,14 @@
 import MusicKit from "./musickitService";
 
 export function shuffleCollection(items) {
-  const shuffled = items.slice().sort(() => Math.random() - 0.5);
+  const rnd = items.map(Math.random);
+  const rndMap = {};
+  items.forEach((item, idx) => {
+    rndMap[item.id] = rnd[idx];
+  });
+  const shuffled = items.slice().sort((a, b) => {
+    return rndMap[a.id] - rndMap[b.id];
+  });
   playCollection(shuffled);
 }
 
@@ -53,6 +60,26 @@ export function playMedia(item) {
 
   const params = item.attributes.playParams;
   playParams(params);
+}
+
+export function formatRuntimeMs(timeInMs) {
+  return formatRuntime(timeInMs / 1000);
+}
+
+// Given a time in seconds, format it for display (ie 5:30)
+export function formatRuntime(timeInSec) {
+  const timeInMins = Math.ceil(timeInSec / 60);
+  let mins = "" + Math.floor(timeInMins % 60);
+
+  const hours = Math.floor(timeInMins / 60);
+
+  if (hours == 1) {
+    return hours + " hour, " + mins + " minutes";
+  } else if (hours > 1) {
+    return hours + " hours, " + mins + " minutes";
+  } else {
+    return mins + " minutes";
+  }
 }
 
 // Given some time in milliseconds, format it for display

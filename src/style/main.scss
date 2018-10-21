@@ -283,7 +283,7 @@ body {
   @include theme() {
     border-top: 1px solid themed("text_light1");
   }
-  margin-top: 10px;
+  margin-top: 40px;
   margin-bottom: 10px;
 }
 
@@ -598,7 +598,7 @@ body {
     background-color: themed("sidebar");
   }
   flex: 0 0 249px;
-  padding: 8px 10px;
+
   overflow: hidden;
 }
 
@@ -633,6 +633,7 @@ body {
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 3px;
+  margin-top: 10px;
 }
 
 .sidebar_entry {
@@ -648,7 +649,10 @@ body {
   margin-left: -10px;
   margin-right: -10px;
   cursor: pointer;
-  width: 100%;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar_entry .material-icons {
@@ -686,14 +690,20 @@ body {
 }
 
 .sidebar_entries {
-  margin-bottom: 15px;
-  width: 100%;
+  overflow: hidden;
+  padding: 8px 10px;
+  padding-top: 0px;
 }
 
 .bottom {
   position: absolute;
   bottom: 0;
-  margin-bottom: 10px;
+  right: 0;
+  left: 0;
+  padding-bottom: 20px;
+  @include theme() {
+    background-color: themed("sidebar");
+  }
 }
 
 .sign_in_container {
@@ -851,4 +861,153 @@ td {
   @include theme() {
     background-color: themed("highlight");
   }
+}
+
+.playlist_container {
+  margin-top: 50px;
+  flex: 1;
+  font-size: 14px;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.playlist_table_wrapper {
+  padding: 0px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.playlist_album_title {
+  margin-top: 5px;
+  @include theme() {
+    color: themed("text_light2");
+  }
+}
+
+.playlist_table {
+  width: 100%;
+}
+
+.playlist_table tr {
+  height: 60px;
+}
+
+.playlist_table tr.selected {
+  @include theme() {
+    background-color: themed("highlight");
+    color: themed("text_full_highlight");
+  }
+}
+
+.playlist_table tr.selected .playlist_album_title {
+  @include theme() {
+    color: themed("text_full_highlight");
+  }
+}
+
+.playlist_table img {
+  margin-top: 3px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 14px;
+  margin-left: 50px;
+  @include theme() {
+    border: 1px solid themed("border_light");
+  }
+}
+
+.playlist_table tr.selected img {
+  @include theme() {
+    border: 1px solid themed("text_full_highlight");
+  }
+}
+
+.playlist_table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  @include theme() {
+    border-bottom: 1px solid themed("border_light");
+  }
+}
+
+.playlist_table td:first-of-type,
+.playlist_table td:last-of-type {
+  @include theme() {
+    border-bottom: 1px solid themed("background");
+  }
+}
+.playlist_table td:last-of-type {
+  text-align: right;
+  padding-right: 50px;
+}
+
+.playlist_header {
+  padding: 145px 50px 0px 50px;
+}
+
+.playlist_artwork {
+  width: 100px;
+  height: 100px;
+
+  border-radius: 5px;
+  @include theme() {
+    border: 1px solid themed("border_light");
+  }
+
+  position: absolute;
+  left: 50px;
+  top: 40px;
+  overflow: hidden;
+  line-height: 0px;
+}
+
+.playlist_artwork_inner {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.playlist_artwork_collage {
+  transform: rotate(20deg);
+  position: absolute;
+  top: -52px;
+  left: -25px;
+  width: 156px;
+  height: 200px;
+}
+
+.playlist_artwork_collage img {
+  width: 50px;
+  height: 50px;
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
+.playlist_title {
+  font-size: 24px;
+  position: absolute;
+  top: 65px;
+  left: 180px;
+}
+
+.playlist_details {
+  @include theme() {
+    color: themed("text_light1");
+  }
+  font-size: 16px;
+  position: absolute;
+  top: 100px;
+  left: 180px;
+}
+
+.light_divider {
+  width: 100%;
+  @include theme() {
+    border-top: 1px solid themed("border_light");
+  }
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

@@ -5,6 +5,8 @@ import AlbumList from "./AlbumList";
 import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
+import Playlist from "./Playlist";
+
 import Sidebar from "./Sidebar";
 import "./style/main.scss";
 import { DEVELOPER_TOKEN } from "./secrets";
@@ -112,6 +114,16 @@ class App extends Component<State> {
       return (
         <Settings settings={settings} adjustSetting={this.adjustSetting} />
       );
+    } else if (page.startsWith("playlist_")) {
+      const playlistId = page.substring(9);
+      return (
+        <Playlist
+          id={playlistId}
+          music={MusicKit.getInstance()}
+          currentSong={currentSong}
+          settings={settings}
+        />
+      );
     } else {
       return "";
     }
@@ -125,6 +137,7 @@ class App extends Component<State> {
       settings,
       displayFilter
     } = this.state;
+
     return (
       <div
         className={
@@ -143,7 +156,16 @@ class App extends Component<State> {
               ""
             )}
             <div className="main_cols">
-              <Sidebar page={page} setPage={this.setPage} />{" "}
+              {authorized ? (
+                <Sidebar
+                  page={page}
+                  setPage={this.setPage}
+                  music={MusicKit.getInstance()}
+                />
+              ) : (
+                ""
+              )}
+
               {authorized ? (
                 this.renderPage()
               ) : (
