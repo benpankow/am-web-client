@@ -5,6 +5,7 @@ let playlistsCache = {};
 let albumList = [];
 let songList = [];
 let playlistList = [];
+let artistList = [];
 
 // Load and cache a set of albums
 export function cacheAlbums(albumIds) {
@@ -59,6 +60,49 @@ export function getAlbum(albumId) {
       });
     return promise;
   }
+}
+
+export function getCachedArtistList() {
+  return artistList;
+}
+
+// Gets all of a user's artists
+export function fetchArtistList(partialCallback, doneCallback) {
+  _getArtistListInner(partialCallback, doneCallback, 0, []);
+}
+
+// Fetches groups of 100 artists, calling partialCallback as each group returns
+function _getArtistListInner(
+  partialCallback,
+  doneCallback,
+  offset,
+  currentList
+) {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+
+  music.api.library
+    .artists(null, {
+      offset: offset,
+      limit: 100
+    })
+    .then(function(cloudArtists) {
+      const appendedList = currentList.concat(cloudArtists);
+
+      partialCallback(appendedList);
+
+      if (cloudArtists.length == 100) {
+        _getArtistListInner(
+          partialCallback,
+          doneCallback,
+          offset + 100,
+          appendedList
+        );
+      } else {
+        doneCallback(appendedList);
+        artistList = appendedList;
+      }
+    });
 }
 
 export function getCachedPlaylistList() {

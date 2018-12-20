@@ -6,6 +6,7 @@ import SongsList from "./SongsList";
 import MediaBar from "./MediaBar";
 import Settings from "./Settings";
 import Playlist from "./Playlist";
+import Artists from "./Artists";
 
 import Sidebar from "./Sidebar";
 import "./style/main.scss";
@@ -104,6 +105,15 @@ class App extends Component<State> {
     } else if (page == "songs") {
       return (
         <SongsList
+          music={MusicKit.getInstance()}
+          currentSong={currentSong}
+          settings={settings}
+          filter={filter}
+        />
+      );
+    } else if (page == "artists") {
+      return (
+        <Artists
           music={MusicKit.getInstance()}
           currentSong={currentSong}
           settings={settings}

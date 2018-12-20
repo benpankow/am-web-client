@@ -1011,3 +1011,42 @@ td {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+.artists_container {
+  margin-top: 50px;
+  flex: 1;
+  font-size: 14px;
+  position: relative;
+  overflow-y: scroll;
+  display: flex;
+}
+
+.artists_sidebar {
+  position: relative;
+  @include theme() {
+    border-right: 1px solid themed("border");
+  }
+  flex: 0 0 249px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.artist {
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  padding-left: 20px;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist.selected {
+  @include theme() {
+    background-color: themed("highlight");
+    color: themed("text_full_highlight");
+  }
+}
