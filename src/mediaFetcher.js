@@ -148,6 +148,43 @@ function _getPlaylistListInner(
     });
 }
 
+export function fetchArtistAlbumList(id, partialCallback, doneCallback) {
+  _fetchArtistAlbumlistInner(id, partialCallback, doneCallback, 0, []);
+}
+
+function _fetchArtistAlbumlistInner(
+  id,
+  partialCallback,
+  doneCallback,
+  offset,
+  currentList
+) {
+  const music = MusicKit.getInstance();
+  const player = music.player;
+  console.log("go");
+  music.api.library
+    .artist(id, {
+      include: "albums"
+    })
+    .then(function(artist) {
+      const appendedList = currentList.concat(artist.relationships.albums.data);
+      console.log(appendedList);
+      partialCallback(appendedList);
+
+      /*if (cloudAlbums.length == 100) {
+        _getAlbumListInner(
+          partialCallback,
+          doneCallback,
+          offset + 100,
+          appendedList
+        );
+      } else {*/
+      doneCallback(appendedList);
+      /*  albumList = appendedList;
+    }*/
+    });
+}
+
 export function getCachedAlbumList() {
   return albumList;
 }

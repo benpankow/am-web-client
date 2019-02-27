@@ -93,6 +93,11 @@ body {
   width: 177px;
 }
 
+.song_list_artist {
+  position: relative;
+  overflow: hidden;
+}
+
 .song_list {
   position: absolute;
   left: 0;
@@ -102,8 +107,13 @@ body {
   padding-top: 36px;
   display: flex;
   z-index: 2;
-  /*transition: height .25s;*/
   overflow: hidden;
+}
+
+.song_list_inner {
+  width: 100%;
+  display: flex;
+  z-index: 3;
 }
 
 .song_list.no_blur {
@@ -283,7 +293,7 @@ body {
   @include theme() {
     border-top: 1px solid themed("text_light1");
   }
-  margin-top: 40px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -1017,7 +1027,7 @@ td {
   flex: 1;
   font-size: 14px;
   position: relative;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: flex;
 }
 
@@ -1030,6 +1040,12 @@ td {
 
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.artist_details {
+  flex: 1;
+  position: relative;
+  overflow-y: scroll;
 }
 
 .artist {

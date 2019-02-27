@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import MusicKit from "./musickitService";
-import { fetchArtistList, getCachedArtistList } from "./mediaFetcher";
+import {
+  fetchArtistList,
+  getCachedArtistList,
+  fetchArtistAlbumList
+} from "./mediaFetcher";
 import {
   playMedia,
   formatTimeMs,
@@ -9,6 +13,7 @@ import {
   shuffleCollection,
   formatRuntimeMs
 } from "./playerUtils";
+import AlbumSongsArtist from "./AlbumSongsArtist";
 
 type Props = {
   music: MusicKit,
@@ -20,7 +25,8 @@ type Props = {
 type State = {
   artists: [],
   width: number,
-  selectedArtist: string
+  selectedArtist: string,
+  albums: []
 };
 
 // List of all a user's artists
@@ -28,7 +34,8 @@ class Artists extends Component<Props, State> {
   state = {
     artists: [],
     width: 250,
-    selectedArtist: null
+    selectedArtist: null,
+    albums: []
   };
 
   componentDidMount() {
@@ -53,7 +60,17 @@ class Artists extends Component<Props, State> {
   };
 
   artistClicked = artist => {
+    const self = this;
+
     this.setState({ selectedArtist: artist.attributes.name });
+
+    fetchArtistAlbumList(
+      artist.id,
+      currentList => {
+        self.setState({ albums: currentList });
+      },
+      () => {}
+    );
   };
 
   renderArtists = () => {
@@ -83,7 +100,8 @@ class Artists extends Component<Props, State> {
   };
 
   render() {
-    const { artists, width } = this.state;
+    const { artists, width, albums } = this.state;
+    const { music, currentSong, settings, filter } = this.props;
 
     return (
       <div className="artists_container">
@@ -94,6 +112,19 @@ class Artists extends Component<Props, State> {
           }}
         >
           {this.renderArtists()}
+        </div>
+        <div className="artist_details">
+          {albums.map((album, idx) => {
+            return (
+              <AlbumSongsArtist
+                album={album}
+                music={music}
+                currentSong={currentSong}
+                settings={settings}
+                key={album.id}
+              />
+            );
+          })}
         </div>
       </div>
     );
