@@ -4,3 +4,6 @@ node_modules
 .idea
 src/secrets.js
 !dist/index.html
+\#*\#
+.\#*
+*~
